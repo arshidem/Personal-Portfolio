@@ -224,16 +224,74 @@ footer { padding: 28px 40px; display: flex; justify-content: space-between; alig
 .mqi::after { content: '◈'; color: var(--gold); font-size: 7px; }
 .gr { opacity: 0; }
 
-/* Resume Prompt Modal */
-#resumePrompt { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #1a1a1a; border: 1px solid var(--gold); border-radius: 12px; padding: 16px 24px; z-index: 10001; display: none; gap: 16px; backdrop-filter: blur(12px); font-family: var(--fm); font-size: 12px; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+/* Resume Prompt Modal - Instant & Reliable */
+#resumePrompt { 
+  position: fixed; 
+  bottom: 30px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  background: #1a1a1a; 
+  border: 1px solid var(--gold); 
+  border-radius: 12px; 
+  padding: 16px 24px; 
+  z-index: 10002; 
+  display: none; 
+  gap: 16px; 
+  backdrop-filter: blur(12px); 
+  font-family: var(--fm); 
+  font-size: 12px; 
+  align-items: center; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  opacity: 1;
+  transition: none;
+}
 #resumePrompt span { color: var(--white); letter-spacing: 0.3px; }
-.prompt-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 6px 16px; border-radius: 6px; cursor: pointer; font-family: var(--fm); font-size: 10px; font-weight: 500; transition: all 0.2s; }
-.prompt-btn:hover { background: var(--gold); color: #0a0a0a; transform: translateY(-2px); }
-.prompt-btn.primary { background: var(--gold); color: #0a0a0a; }
-.prompt-btn.primary:hover { background: var(--gold-l); }
-#closePrompt { background: none; border: none; color: #888; cursor: pointer; font-size: 14px; padding: 4px 8px; transition: color 0.2s; }
-#closePrompt:hover { color: var(--gold); }
-@media (max-width: 550px) { #resumePrompt { flex-wrap: wrap; justify-content: center; width: 90%; gap: 12px; } }
+.prompt-btn { 
+  background: transparent; 
+  border: 1px solid var(--gold); 
+  color: var(--gold); 
+  padding: 6px 16px; 
+  border-radius: 6px; 
+  cursor: pointer; 
+  font-family: var(--fm); 
+  font-size: 10px; 
+  font-weight: 500; 
+  transition: all 0.2s; 
+}
+.prompt-btn:hover { 
+  background: var(--gold); 
+  color: #0a0a0a; 
+  transform: translateY(-2px); 
+}
+.prompt-btn.primary { 
+  background: var(--gold); 
+  color: #0a0a0a; 
+}
+.prompt-btn.primary:hover { 
+  background: var(--gold-l); 
+}
+#closePrompt { 
+  background: none; 
+  border: none; 
+  color: #888; 
+  cursor: pointer; 
+  font-size: 14px; 
+  padding: 4px 8px; 
+  transition: color 0.2s; 
+}
+#closePrompt:hover { 
+  color: var(--gold); 
+}
+@media (max-width: 550px) { 
+  #resumePrompt { 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    width: 90%; 
+    gap: 12px; 
+    bottom: 20px;
+    padding: 14px 18px;
+  } 
+}
 </style>
 </head>
 <body>
@@ -313,35 +371,37 @@ hbg.addEventListener('click', openMenu); closeMenuBtn.addEventListener('click', 
 ['skills','projects','exp','about','contact'].forEach(id => { ScrollTrigger.create({ trigger: '#'+id, start: 'top 55%', onEnter: () => setActive(id), onEnterBack: () => setActive(id) }); });
 function setActive(id) { document.querySelectorAll('.nav-links a').forEach(a => { a.classList.toggle('act', a.getAttribute('href') === '#'+id); }); }
 
-// ========== RESUME PROMPT (View or Download) ==========
+// ========== RESUME PROMPT - INSTANT & RELIABLE with correct filename ==========
 const resumeBtnEl = document.getElementById('resumeBtn');
 const promptDiv = document.getElementById('resumePrompt');
 const viewBtn = document.getElementById('viewResume');
 const downloadResumeBtn = document.getElementById('downloadResumeBtn');
 const closePromptBtn = document.getElementById('closePrompt');
+const RESUME_FILE = 'Mohammed_Arshid_Resume.pdf'; // your exact filename
 
-// Function to download resume
 function downloadResumeFile() {
   const link = document.createElement('a');
-  link.href = 'Mohammed_Arshid_Resume.pdf';  // CHANGE THIS to your actual resume filename
-  link.download = 'Mohammed_Arshid_Resume.pdf';
+  link.href = RESUME_FILE;
+  link.download = RESUME_FILE;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
 }
 
 resumeBtnEl?.addEventListener('click', (e) => { 
-  e.preventDefault(); 
+  e.preventDefault();
+  e.stopPropagation();
   promptDiv.style.display = 'flex';
-  gsap.fromTo(promptDiv, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 });
 });
 
-viewBtn?.addEventListener('click', () => {
-  window.open('Mohammed_Arshid_Resume.pdf', '_blank');  // CHANGE THIS to your actual resume filename
+viewBtn?.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.open(RESUME_FILE, '_blank');
   promptDiv.style.display = 'none';
 });
 
-downloadResumeBtn?.addEventListener('click', () => {
+downloadResumeBtn?.addEventListener('click', (e) => {
+  e.preventDefault();
   downloadResumeFile();
   promptDiv.style.display = 'none';
 });
@@ -350,9 +410,9 @@ closePromptBtn?.addEventListener('click', () => {
   promptDiv.style.display = 'none';
 });
 
-// Click outside to close? Optional: add backdrop click
-document.addEventListener('click', (e) => {
-  if (promptDiv.style.display === 'flex' && !promptDiv.contains(e.target) && e.target !== resumeBtnEl) {
+// Close when clicking outside the modal
+promptDiv?.addEventListener('click', (e) => {
+  if (e.target === promptDiv) {
     promptDiv.style.display = 'none';
   }
 });
