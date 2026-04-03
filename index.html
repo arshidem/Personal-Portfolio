@@ -372,16 +372,23 @@ hbg.addEventListener('click', openMenu); closeMenuBtn.addEventListener('click', 
 function setActive(id) { document.querySelectorAll('.nav-links a').forEach(a => { a.classList.toggle('act', a.getAttribute('href') === '#'+id); }); }
 
 // ========== RESUME PROMPT - INSTANT & RELIABLE with correct filename ==========
+// ========== RESUME PROMPT - WITH CACHE BUSTING ==========
 const resumeBtnEl = document.getElementById('resumeBtn');
 const promptDiv = document.getElementById('resumePrompt');
 const viewBtn = document.getElementById('viewResume');
 const downloadResumeBtn = document.getElementById('downloadResumeBtn');
 const closePromptBtn = document.getElementById('closePrompt');
-const RESUME_FILE = 'Mohammed_Arshid_Resume.pdf'; // your exact filename
+const RESUME_FILE = 'Mohammed_Arshid_Resume.pdf';
+
+// Add cache-busting timestamp to force fresh file
+function getResumeUrl() {
+  const timestamp = new Date().getTime();
+  return `${RESUME_FILE}?t=${timestamp}`;
+}
 
 function downloadResumeFile() {
   const link = document.createElement('a');
-  link.href = RESUME_FILE;
+  link.href = getResumeUrl();  // Forces fresh download
   link.download = RESUME_FILE;
   document.body.appendChild(link);
   link.click();
@@ -396,7 +403,7 @@ resumeBtnEl?.addEventListener('click', (e) => {
 
 viewBtn?.addEventListener('click', (e) => {
   e.preventDefault();
-  window.open(RESUME_FILE, '_blank');
+  window.open(getResumeUrl(), '_blank');  // Forces fresh view
   promptDiv.style.display = 'none';
 });
 
@@ -410,7 +417,6 @@ closePromptBtn?.addEventListener('click', () => {
   promptDiv.style.display = 'none';
 });
 
-// Close when clicking outside the modal
 promptDiv?.addEventListener('click', (e) => {
   if (e.target === promptDiv) {
     promptDiv.style.display = 'none';
