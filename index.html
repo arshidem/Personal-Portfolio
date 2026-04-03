@@ -295,10 +295,18 @@ hbg.addEventListener('click', openMenu); closeMenuBtn.addEventListener('click', 
 function setActive(id) { document.querySelectorAll('.nav-links a').forEach(a => { a.classList.toggle('act', a.getAttribute('href') === '#'+id); }); }
 
 // ========== RESUME DOWNLOAD (from same folder on GitHub) ==========
+// ========== RESUME - Opens in new tab + triggers download ==========
 document.getElementById('resumeBtn')?.addEventListener('click', (e) => { 
   e.preventDefault(); 
-  // Replace 'resume.pdf' with your actual filename (e.g., 'Mohammed_Arshid_Resume.pdf')
+  // Open in new tab
   window.open('Mohammed_Arshid_Resume.pdf', '_blank');
+  // Also trigger download (optional, gives user choice)
+  const link = document.createElement('a');
+  link.href = 'Mohammed_Arshid_Resume.pdf';
+  link.download = 'Mohammed_Arshid_Resume.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 });
 
 // ========== FORM SUBMISSION FULLY WORKING (Formspree) ==========
