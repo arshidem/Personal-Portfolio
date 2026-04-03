@@ -223,6 +223,17 @@ footer { padding: 28px 40px; display: flex; justify-content: space-between; alig
 .mqi { display: flex; align-items: center; gap: 12px; padding: 0 28px; font-family: var(--fm); font-size: 10px; color: var(--off); letter-spacing: 0.12em; white-space: nowrap; }
 .mqi::after { content: '◈'; color: var(--gold); font-size: 7px; }
 .gr { opacity: 0; }
+
+/* Resume Prompt Modal */
+#resumePrompt { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #1a1a1a; border: 1px solid var(--gold); border-radius: 12px; padding: 16px 24px; z-index: 10001; display: none; gap: 16px; backdrop-filter: blur(12px); font-family: var(--fm); font-size: 12px; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+#resumePrompt span { color: var(--white); letter-spacing: 0.3px; }
+.prompt-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 6px 16px; border-radius: 6px; cursor: pointer; font-family: var(--fm); font-size: 10px; font-weight: 500; transition: all 0.2s; }
+.prompt-btn:hover { background: var(--gold); color: #0a0a0a; transform: translateY(-2px); }
+.prompt-btn.primary { background: var(--gold); color: #0a0a0a; }
+.prompt-btn.primary:hover { background: var(--gold-l); }
+#closePrompt { background: none; border: none; color: #888; cursor: pointer; font-size: 14px; padding: 4px 8px; transition: color 0.2s; }
+#closePrompt:hover { color: var(--gold); }
+@media (max-width: 550px) { #resumePrompt { flex-wrap: wrap; justify-content: center; width: 90%; gap: 12px; } }
 </style>
 </head>
 <body>
@@ -244,6 +255,14 @@ footer { padding: 28px 40px; display: flex; justify-content: space-between; alig
 
 <section id="contact" class="sec"><div class="secin"><div class="ctwrap"><div class="gr"><h2 class="ctag">Let's build something <em>real</em></h2><p class="csub">Whether it's a new project, collaboration, or just a conversation — I'm always open.</p><div class="clinks"><a href="mailto:mohammed.arshid@dev.me" class="clink"><span class="clinkic">✉</span><span>mohammed.arshid@dev.me</span></a><a href="tel:+918157875032" class="clink"><span class="clinkic">◎</span>+91 81578 75032</a><a href="https://www.linkedin.com/in/mohammed-arshid-em" target="_blank" class="clink"><span class="clinkic">⬡</span>LinkedIn Profile</a><a href="https://github.com/arshidem" target="_blank" class="clink"><span class="clinkic">◈</span>GitHub Profile</a></div></div><div class="gr"><div class="cform"><div><label class="flabel">Your Name</label><input class="fin" id="fn" type="text" placeholder="Rahul Sharma" /></div><div><label class="flabel">Email</label><input class="fin" id="fe" type="email" placeholder="you@example.com" /></div><div><label class="flabel">Message</label><textarea class="fta" id="fm" placeholder="Tell me about your project..."></textarea></div><button class="btn-send" id="sendBtn"><span id="sbtn">Send Message →</span></button><div id="sstatus"></div></div></div></div></div></section>
 <footer><div class="fcopy">© 2026 Mohammed Arshid EM · Palakkad, Kerala</div><button class="fbk" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><path d="M6.5 10.5V2.5M2.5 6.5l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></footer>
+
+<!-- Resume Prompt Modal -->
+<div id="resumePrompt">
+  <span>📄 How would you like to open the resume?</span>
+  <button id="viewResume" class="prompt-btn primary">View in Browser</button>
+  <button id="downloadResumeBtn" class="prompt-btn">Download PDF</button>
+  <button id="closePrompt" title="Close">✕</button>
+</div>
 
 <script>
 // disable custom cursor on mobile
@@ -294,19 +313,48 @@ hbg.addEventListener('click', openMenu); closeMenuBtn.addEventListener('click', 
 ['skills','projects','exp','about','contact'].forEach(id => { ScrollTrigger.create({ trigger: '#'+id, start: 'top 55%', onEnter: () => setActive(id), onEnterBack: () => setActive(id) }); });
 function setActive(id) { document.querySelectorAll('.nav-links a').forEach(a => { a.classList.toggle('act', a.getAttribute('href') === '#'+id); }); }
 
-// ========== RESUME DOWNLOAD (from same folder on GitHub) ==========
-// ========== RESUME - Opens in new tab + triggers download ==========
-document.getElementById('resumeBtn')?.addEventListener('click', (e) => { 
-  e.preventDefault(); 
-  // Open in new tab
-  window.open('Mohammed_Arshid_Resume.pdf', '_blank');
-  // Also trigger download (optional, gives user choice)
+// ========== RESUME PROMPT (View or Download) ==========
+const resumeBtnEl = document.getElementById('resumeBtn');
+const promptDiv = document.getElementById('resumePrompt');
+const viewBtn = document.getElementById('viewResume');
+const downloadResumeBtn = document.getElementById('downloadResumeBtn');
+const closePromptBtn = document.getElementById('closePrompt');
+
+// Function to download resume
+function downloadResumeFile() {
   const link = document.createElement('a');
-  link.href = 'Mohammed_Arshid_Resume.pdf';
+  link.href = 'Mohammed_Arshid_Resume.pdf';  // CHANGE THIS to your actual resume filename
   link.download = 'Mohammed_Arshid_Resume.pdf';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+}
+
+resumeBtnEl?.addEventListener('click', (e) => { 
+  e.preventDefault(); 
+  promptDiv.style.display = 'flex';
+  gsap.fromTo(promptDiv, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 });
+});
+
+viewBtn?.addEventListener('click', () => {
+  window.open('resume.pdf', '_blank');  // CHANGE THIS to your actual resume filename
+  promptDiv.style.display = 'none';
+});
+
+downloadResumeBtn?.addEventListener('click', () => {
+  downloadResumeFile();
+  promptDiv.style.display = 'none';
+});
+
+closePromptBtn?.addEventListener('click', () => {
+  promptDiv.style.display = 'none';
+});
+
+// Click outside to close? Optional: add backdrop click
+document.addEventListener('click', (e) => {
+  if (promptDiv.style.display === 'flex' && !promptDiv.contains(e.target) && e.target !== resumeBtnEl) {
+    promptDiv.style.display = 'none';
+  }
 });
 
 // ========== FORM SUBMISSION FULLY WORKING (Formspree) ==========
