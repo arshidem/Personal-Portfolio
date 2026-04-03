@@ -19,14 +19,19 @@
   --fd: 'DM Serif Display', serif; --fm: 'JetBrains Mono', monospace; --fb: 'Outfit', sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
-body { background: var(--bg); color: var(--white); font-family: var(--fb); font-weight: 300; overflow-x: hidden; cursor: none; }
-::selection { background: var(--gold); color: var(--bg); }
-
-/* ── Cursor ── */
-#cdot, #cring { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.15s ease; }
-#cdot { width: 6px; height: 6px; background: var(--gold); top: 0; left: 0; transform: translate(-50%,-50%); }
-#cring { width: 42px; height: 42px; border: 1.5px solid rgba(201,168,76,0.65); top: 0; left: 0; transform: translate(-50%,-50%); transition: width 0.2s, height 0.2s, border-color 0.2s, background 0.2s; }
-#cring.big { width: 72px; height: 72px; background: rgba(201,168,76,0.05); border-color: var(--gold-l); }
+body { background: var(--bg); color: var(--white); font-family: var(--fb); font-weight: 300; overflow-x: hidden; }
+body.mobile-cursor-off { cursor: auto; }
+/* Custom cursor only on desktop (screen width > 900px) */
+@media (min-width: 901px) {
+  body:not(.mobile-cursor-off) { cursor: none; }
+  #cdot, #cring { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.15s ease; }
+  #cdot { width: 6px; height: 6px; background: var(--gold); top: 0; left: 0; transform: translate(-50%,-50%); }
+  #cring { width: 42px; height: 42px; border: 1.5px solid rgba(201,168,76,0.65); top: 0; left: 0; transform: translate(-50%,-50%); transition: width 0.2s, height 0.2s, border-color 0.2s, background 0.2s; }
+  #cring.big { width: 72px; height: 72px; background: rgba(201,168,76,0.05); border-color: var(--gold-l); }
+}
+@media (max-width: 900px) {
+  #cdot, #cring { display: none !important; }
+}
 
 /* ── Loader ── */
 #loader { position: fixed; inset: 0; background: #030303; z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px; }
@@ -134,7 +139,7 @@ nav {
 .snum { font-family: var(--fd); font-size: 32px; color: var(--white); line-height: 1; }
 .slbl { font-family: var(--fm); font-size: 8px; color: var(--grey); letter-spacing: 0.1em; margin-top: 5px; }
 
-/* Skills */
+/* Skills, Projects, etc */
 .skgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
 @media (max-width: 900px) { .skgrid { grid-template-columns: 1fr; } }
 .skcard { background: var(--bg3); padding: 34px 28px; position: relative; overflow: hidden; transition: background 0.3s; }
@@ -148,7 +153,6 @@ nav {
 .sktags { display: flex; flex-wrap: wrap; gap: 8px; }
 .sktag { padding: 4px 10px; font-family: var(--fm); font-size: 9px; color: rgba(240,236,228,0.5); border: 1px solid rgba(255,255,255,0.06); }
 
-/* Projects */
 .prjlist { display: flex; flex-direction: column; gap: 2px; }
 .prjitem { display: grid; grid-template-columns: 70px 1fr 40px; align-items: start; gap: 32px; padding: 36px 34px; background: var(--bg3); border-left: 2px solid transparent; text-decoration: none; color: inherit; transition: 0.35s var(--ease); cursor: pointer; }
 .prjitem:hover { background: var(--bg4); border-left-color: var(--gold); transform: translateX(6px); }
@@ -163,7 +167,6 @@ nav {
 .prjitem:hover .prjarr { transform: translateX(6px); }
 @media (max-width: 800px) { .prjitem { grid-template-columns: 1fr; gap: 12px; padding: 28px 20px; } .prjnum { display: none; } }
 
-/* Timeline */
 .tl { position: relative; padding-left: 44px; border-left: 1px solid var(--border); margin-left: 16px; }
 .tl::before { content: ''; position: absolute; left: -1px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, var(--gold) 25%, var(--gold) 75%, transparent); opacity: 0.4; }
 .tlitem { padding-bottom: 52px; position: relative; }
@@ -174,7 +177,6 @@ nav {
 .tlorg { font-family: var(--fm); font-size: 10px; color: var(--grey); margin-bottom: 12px; }
 .tldesc { font-size: 13.5px; line-height: 1.7; color: rgba(240,236,228,0.5); max-width: 560px; }
 
-/* About */
 .aboutgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 68px; align-items: center; }
 @media (max-width: 900px) { .aboutgrid { grid-template-columns: 1fr; gap: 48px; } }
 .abtxt p { font-size: 14px; line-height: 1.85; color: rgba(240,236,228,0.55); margin-bottom: 20px; }
@@ -192,7 +194,6 @@ nav {
 .cnum { font-family: var(--fd); font-size: 42px; color: var(--gold); display: block; }
 .clbl { font-family: var(--fm); font-size: 8px; color: var(--grey); letter-spacing: 0.1em; margin-top: 6px; }
 
-/* Contact */
 .ctwrap { display: grid; grid-template-columns: 1fr 1fr; gap: 68px; }
 @media (max-width: 900px) { .ctwrap { grid-template-columns: 1fr; gap: 48px; } }
 .ctag { font-family: var(--fd); font-size: clamp(28px,4vw,48px); line-height: 1.2; margin-bottom: 20px; }
@@ -230,7 +231,7 @@ footer { padding: 28px 40px; display: flex; justify-content: space-between; alig
 <nav id="mainnav"><a href="#hero" class="nav-brand">MA.DEV</a><ul class="nav-links"><li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li><li><a href="#exp">Journey</a></li><li><a href="#about">About</a></li></ul><a href="#contact" class="nav-cta">Contact</a><button class="hbg" id="hbg"><span></span><span></span><span></span></button></nav>
 <div id="mobileMenu"><div id="menuBackdrop"></div><div class="mobile-content" id="menuCard"><div class="menu-header"><a href="#hero" class="menu-brand" onclick="closeMobile()">MA.DEV</a><button class="close-btn" id="closeMenu">✕</button></div><div class="menu-links"><a href="#skills" data-num="01" class="menu-link" onclick="closeMobile()">Skills</a><a href="#projects" data-num="02" class="menu-link" onclick="closeMobile()">Projects</a><a href="#exp" data-num="03" class="menu-link" onclick="closeMobile()">Journey</a><a href="#about" data-num="04" class="menu-link" onclick="closeMobile()">About</a></div><div class="menu-footer"><a href="#contact" class="menu-cta" onclick="closeMobile()">Get in Touch →</a><div class="menu-socials"><a href="https://www.linkedin.com/in/mohammed-arshid-em" target="_blank">LinkedIn</a><span>·</span><a href="https://github.com/arshidem" target="_blank">GitHub</a></div></div></div></div>
 
-<section id="hero"><canvas id="pcanvas"></canvas><div class="hgrid"></div><div class="hl"><div class="htag" id="htag"><span class="htag-dot"></span>Available for opportunities</div><h1 class="hname"><span class="hnrow"><span class="hnin" id="hn1">Mohammed</span></span><span class="hnrow"><span class="hnin" id="hn2" style="color:var(--gold);font-style:italic">Arshid</span></span></h1><p class="hrole" id="hrole"><span id="ttext"></span><span id="tcur"></span></p><p class="hdesc" id="hdesc">Building scalable web and mobile applications from the ground up — from Supabase-backed Flutter apps to full-featured MERN e-commerce platforms.</p><div class="hctas" id="hctas"><a href="#projects" class="btn-g mag"><span>View Projects →</span></a><a href="#" class="btn-o mag" id="fakeResume"><span>Download Resume ↓</span></a><a href="#contact" class="btn-o mag"><span>Get in Touch</span></a></div></div><div class="hr"><div class="hcard" id="hcard"><div class="clabel">// Current Stack</div><div class="sgrid"><div><div class="snum cval" data-v="2">0</div><div class="slbl">Active Projects</div></div><div><div class="snum cval" data-v="21">0</div><div class="slbl">Years Old</div></div><div><div class="snum cval" data-v="3">0</div><div class="slbl">Stacks Shipped</div></div><div><div class="snum">∞</div><div class="slbl">Iterations</div></div></div></div></div></section>
+<section id="hero"><canvas id="pcanvas"></canvas><div class="hgrid"></div><div class="hl"><div class="htag" id="htag"><span class="htag-dot"></span>Available for opportunities</div><h1 class="hname"><span class="hnrow"><span class="hnin" id="hn1">Mohammed</span></span><span class="hnrow"><span class="hnin" id="hn2" style="color:var(--gold);font-style:italic">Arshid</span></span></h1><p class="hrole" id="hrole"><span id="ttext"></span><span id="tcur"></span></p><p class="hdesc" id="hdesc">Building scalable web and mobile applications from the ground up — from Supabase-backed Flutter apps to full-featured MERN e-commerce platforms.</p><div class="hctas" id="hctas"><a href="#projects" class="btn-g mag"><span>View Projects →</span></a><a href="#" class="btn-o mag" id="resumeBtn"><span>Download Resume ↓</span></a><a href="#contact" class="btn-o mag"><span>Get in Touch</span></a></div></div><div class="hr"><div class="hcard" id="hcard"><div class="clabel">// Current Stack</div><div class="sgrid"><div><div class="snum cval" data-v="2">0</div><div class="slbl">Active Projects</div></div><div><div class="snum cval" data-v="21">0</div><div class="slbl">Years Old</div></div><div><div class="snum cval" data-v="3">0</div><div class="slbl">Stacks Shipped</div></div><div><div class="snum">∞</div><div class="slbl">Iterations</div></div></div></div></div></section>
 <div class="mqwrap"><div class="mqtrack" id="mqtrack"></div></div>
 
 <section id="skills" class="sec"><div class="secin"><div class="ey"><div class="eyline"></div><span class="eytxt">Technical Skills</span></div><h2 class="stitle gr">What I <em>build with</em></h2><div class="skgrid"><div class="skcard gr"><div class="skglow"></div><div class="skbar"></div><span class="skicon">◈</span><div class="skname">Frontend</div><div class="sktags"><span class="sktag">React.js</span><span class="sktag">HTML5/CSS3</span><span class="sktag">Tailwind</span><span class="sktag">JavaScript ES6+</span></div></div><div class="skcard gr"><div class="skglow"></div><div class="skbar"></div><span class="skicon">⬡</span><div class="skname">Backend</div><div class="sktags"><span class="sktag">Node.js</span><span class="sktag">Express</span><span class="sktag">REST APIs</span></div></div><div class="skcard gr"><div class="skglow"></div><div class="skbar"></div><span class="skicon">◉</span><div class="skname">Mobile</div><div class="sktags"><span class="sktag">Flutter</span><span class="sktag">Dart</span><span class="sktag">Riverpod</span><span class="sktag">RevenueCat</span></div></div><div class="skcard gr"><div class="skglow"></div><div class="skbar"></div><span class="skicon">▣</span><div class="skname">Databases</div><div class="sktags"><span class="sktag">MongoDB</span><span class="sktag">Supabase</span><span class="sktag">Firebase</span><span class="sktag">PostgreSQL</span></div></div><div class="skcard gr"><div class="skglow"></div><div class="skbar"></div><span class="skicon">⬟</span><div class="skname">Infra & Tools</div><div class="sktags"><span class="sktag">Cloudflare R2</span><span class="sktag">Git/GitHub</span><span class="sktag">FCM</span><span class="sktag">AdMob</span></div></div><div class="skcard gr"><div class="skglow"></div><div class="skbar"></div><span class="skicon">◎</span><div class="skname">Design Patterns</div><div class="sktags"><span class="sktag">Clean Arch</span><span class="sktag">RLS</span><span class="sktag">PWA</span></div></div></div></div></section>
@@ -241,10 +242,17 @@ footer { padding: 28px 40px; display: flex; justify-content: space-between; alig
 
 <section id="about" class="sec"><div class="secin"><div class="ey"><div class="eyline"></div><span class="eytxt">About Me</span></div><div class="aboutgrid"><div class="abtxt gr"><p class="big">"I build things that work — and work at scale."</p><p>I'm a 21-year-old Full Stack & Flutter developer from Palakkad, Kerala. Currently building production-grade applications with a focus on clean architecture and real impact.</p><p>Open to freelance, collaborations, and full-time roles where I can contribute meaningfully.</p></div><div class="gr"><div class="certlist"><div class="certitem"><div class="certic">◈</div><div><div class="certn">B.Com – Computer Application</div><div class="certm">Calicut University · 2024</div></div></div><div class="certitem"><div class="certic">⬡</div><div><div class="certn">MERN Stack Certification</div><div class="certm">OneTeam Solutions · 2025</div></div></div><div class="certitem"><div class="certic">◉</div><div><div class="certn">Flutter Mastery</div><div class="certm">Self-taught · KoFund & Fate Unwritten</div></div></div></div></div></div><div class="cntrs gr"><div class="cntr"><span class="cnum cval" data-v="2">0</span><div class="clbl">Apps in Production</div></div><div class="cntr"><span class="cnum cval" data-v="6">0</span><div class="clbl">Months Training</div></div><div class="cntr"><span class="cnum cval" data-v="10">0</span><div class="clbl">Tech Stacks</div></div><div class="cntr"><span class="cnum cval" data-v="3">0</span><div class="clbl">Major Projects</div></div></div></div></section>
 
-<section id="contact" class="sec"><div class="secin"><div class="ctwrap"><div class="gr"><h2 class="ctag">Let's build something <em>real</em></h2><p class="csub">Whether it's a new project, collaboration, or just a conversation — I'm always open.</p><div class="clinks"><a href="/cdn-cgi/l/email-protection#c2a3b0b1aaaba6a7afd282a5afa3abaeeca1adaf" class="clink"><span class="clinkic">✉</span><span>mohammed.arshid@dev.me</span></a><a href="tel:+918157875032" class="clink"><span class="clinkic">◎</span>+91 81578 75032</a><a href="https://www.linkedin.com/in/mohammed-arshid-em" target="_blank" class="clink"><span class="clinkic">⬡</span>LinkedIn Profile</a><a href="https://github.com/arshidem" target="_blank" class="clink"><span class="clinkic">◈</span>GitHub Profile</a></div></div><div class="gr"><div class="cform"><div><label class="flabel">Your Name</label><input class="fin" id="fn" type="text" placeholder="Rahul Sharma" /></div><div><label class="flabel">Email</label><input class="fin" id="fe" type="email" placeholder="you@example.com" /></div><div><label class="flabel">Message</label><textarea class="fta" id="fm" placeholder="Tell me about your project..."></textarea></div><button class="btn-send" onclick="doSend()"><span id="sbtn">Send Message →</span></button><div id="sstatus"></div></div></div></div></div></section>
+<section id="contact" class="sec"><div class="secin"><div class="ctwrap"><div class="gr"><h2 class="ctag">Let's build something <em>real</em></h2><p class="csub">Whether it's a new project, collaboration, or just a conversation — I'm always open.</p><div class="clinks"><a href="mailto:mohammed.arshid@dev.me" class="clink"><span class="clinkic">✉</span><span>mohammed.arshid@dev.me</span></a><a href="tel:+918157875032" class="clink"><span class="clinkic">◎</span>+91 81578 75032</a><a href="https://www.linkedin.com/in/mohammed-arshid-em" target="_blank" class="clink"><span class="clinkic">⬡</span>LinkedIn Profile</a><a href="https://github.com/arshidem" target="_blank" class="clink"><span class="clinkic">◈</span>GitHub Profile</a></div></div><div class="gr"><div class="cform"><div><label class="flabel">Your Name</label><input class="fin" id="fn" type="text" placeholder="Rahul Sharma" /></div><div><label class="flabel">Email</label><input class="fin" id="fe" type="email" placeholder="you@example.com" /></div><div><label class="flabel">Message</label><textarea class="fta" id="fm" placeholder="Tell me about your project..."></textarea></div><button class="btn-send" id="sendBtn"><span id="sbtn">Send Message →</span></button><div id="sstatus"></div></div></div></div></div></section>
 <footer><div class="fcopy">© 2026 Mohammed Arshid EM · Palakkad, Kerala</div><button class="fbk" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><path d="M6.5 10.5V2.5M2.5 6.5l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></footer>
 
 <script>
+// disable custom cursor on mobile
+if (window.innerWidth <= 900) document.body.classList.add('mobile-cursor-off');
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= 900) document.body.classList.add('mobile-cursor-off');
+  else document.body.classList.remove('mobile-cursor-off');
+});
+
 gsap.registerPlugin(ScrollTrigger);
 // Loader
 const loaderBar = document.getElementById('ldbar'), pctSpan = document.getElementById('ldpct');
@@ -259,11 +267,13 @@ class Part { constructor() { this.reset(true); } reset(init) { this.x = Math.ran
 for (let i = 0; i < 85; i++) particles.push(new Part());
 function animateParticles() { ctx.clearRect(0,0,w,h); particles.forEach(p => { p.update(); p.draw(); }); for (let i = 0; i < particles.length; i++) for (let j = i+1; j < particles.length; j++) { let dx = particles[i].x-particles[j].x, dy = particles[i].y-particles[j].y, dist = Math.hypot(dx,dy); if (dist < 100) { ctx.beginPath(); ctx.strokeStyle=`rgba(201,168,76,${0.08*(1-dist/100)})`; ctx.lineWidth=0.5; ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); } } requestAnimationFrame(animateParticles); }
 animateParticles();
-// Cursor
-const cdot = document.getElementById('cdot'), cring = document.getElementById('cring'); let mx = 0, my = 0, ringX = 0, ringY = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cdot.style.left = mx+'px'; cdot.style.top = my+'px'; });
-function ringAnim() { ringX += (mx-ringX)*0.12; ringY += (my-ringY)*0.12; cring.style.left = ringX+'px'; cring.style.top = ringY+'px'; requestAnimationFrame(ringAnim); } ringAnim();
-document.querySelectorAll('a,button,.prjitem,.skcard,.certitem,.clink').forEach(el => { el.addEventListener('mouseenter', () => cring.classList.add('big')); el.addEventListener('mouseleave', () => cring.classList.remove('big')); });
+// Cursor only on desktop
+if (window.innerWidth > 900) {
+  const cdot = document.getElementById('cdot'), cring = document.getElementById('cring'); let mx = 0, my = 0, ringX = 0, ringY = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cdot.style.left = mx+'px'; cdot.style.top = my+'px'; });
+  function ringAnim() { ringX += (mx-ringX)*0.12; ringY += (my-ringY)*0.12; if(cring) { cring.style.left = ringX+'px'; cring.style.top = ringY+'px'; } requestAnimationFrame(ringAnim); } ringAnim();
+  document.querySelectorAll('a,button,.prjitem,.skcard,.certitem,.clink').forEach(el => { el.addEventListener('mouseenter', () => cring?.classList.add('big')); el.addEventListener('mouseleave', () => cring?.classList.remove('big')); });
+}
 // Marquee
 const mqtrack = document.getElementById('mqtrack'); const tags = ['Flutter','React.js','Node.js','Supabase','MongoDB','Dart','Firebase','Cloudflare R2','Express','Tailwind','PostgreSQL','RevenueCat']; for (let i = 0; i < 5; i++) tags.forEach(t => { let div = document.createElement('div'); div.className = 'mqi'; div.textContent = t; mqtrack.appendChild(div); });
 // Skill glow
@@ -283,9 +293,61 @@ hbg.addEventListener('click', openMenu); closeMenuBtn.addEventListener('click', 
 // Active nav
 ['skills','projects','exp','about','contact'].forEach(id => { ScrollTrigger.create({ trigger: '#'+id, start: 'top 55%', onEnter: () => setActive(id), onEnterBack: () => setActive(id) }); });
 function setActive(id) { document.querySelectorAll('.nav-links a').forEach(a => { a.classList.toggle('act', a.getAttribute('href') === '#'+id); }); }
-// Contact form (simulate demo)
-window.doSend = function() { const n = document.getElementById('fn').value.trim(), e = document.getElementById('fe').value.trim(), m = document.getElementById('fm').value.trim(); const statusDiv = document.getElementById('sstatus'), btnSpan = document.getElementById('sbtn'); if (!n||!e||!m) { statusDiv.style.color='#e07070'; statusDiv.textContent='Please fill all fields.'; return; } btnSpan.textContent = 'Sending...'; setTimeout(() => { btnSpan.textContent = 'Sent ✓'; statusDiv.style.color = 'var(--gold)'; statusDiv.textContent = 'Message received — I will reply soon!'; document.getElementById('fn').value = ''; document.getElementById('fe').value = ''; document.getElementById('fm').value = ''; setTimeout(() => { btnSpan.textContent = 'Send Message →'; }, 2000); }, 800); };
-document.getElementById('fakeResume')?.addEventListener('click', (e) => { e.preventDefault(); alert('Resume download simulation: Mohammed_Arshid_Resume.pdf'); });
+
+// ========== RESUME DOWNLOAD (from same folder on GitHub) ==========
+document.getElementById('resumeBtn')?.addEventListener('click', (e) => { 
+  e.preventDefault(); 
+  // Replace 'resume.pdf' with your actual filename (e.g., 'Mohammed_Arshid_Resume.pdf')
+  window.open('resume.pdf', '_blank');
+});
+
+// ========== FORM SUBMISSION FULLY WORKING (Formspree) ==========
+document.getElementById('sendBtn')?.addEventListener('click', function() {
+  const name = document.getElementById('fn').value.trim();
+  const email = document.getElementById('fe').value.trim();
+  const message = document.getElementById('fm').value.trim();
+  const statusDiv = document.getElementById('sstatus');
+  const btnSpan = document.getElementById('sbtn');
+  
+  if (!name || !email || !message) {
+    statusDiv.style.color = '#e07070';
+    statusDiv.textContent = '❌ Please fill all fields.';
+    return;
+  }
+  if (!email.includes('@') || !email.includes('.')) {
+    statusDiv.style.color = '#e07070';
+    statusDiv.textContent = '❌ Please enter a valid email address.';
+    return;
+  }
+  
+  btnSpan.textContent = 'Sending...';
+  statusDiv.style.color = 'var(--gold)';
+  statusDiv.textContent = 'Sending...';
+  
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('_replyto', email);
+  formData.append('message', message);
+  formData.append('_subject', `Portfolio Contact from ${name}`);
+  
+  fetch('https://formspree.io/f/mlgowozy', {
+    method: 'POST',
+    body: formData,
+    mode: 'no-cors'
+  }).then(() => {
+    btnSpan.textContent = '✓ Sent!';
+    statusDiv.style.color = '#4ade80';
+    statusDiv.textContent = '✓ Message sent successfully! I will reply soon.';
+    document.getElementById('fn').value = '';
+    document.getElementById('fe').value = '';
+    document.getElementById('fm').value = '';
+    setTimeout(() => { btnSpan.textContent = 'Send Message →'; }, 3000);
+  }).catch(() => {
+    btnSpan.textContent = 'Send Message →';
+    statusDiv.style.color = '#e07070';
+    statusDiv.textContent = '❌ Error. Please email me directly.';
+  });
+});
 </script>
 </body>
 </html>
