@@ -1,3 +1,6 @@
+Here is the complete, ready-to-deploy portfolio HTML file with PWA support, fixed custom cursor, and all features working.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +9,14 @@
 <meta name="description" content="Mohammed Arshid — Full Stack & Flutter Developer. Building scalable web and mobile applications with React, Node.js, Flutter, Supabase. View portfolio, projects and contact.">
 <meta name="theme-color" content="#080808">
 <title>Mohammed Arshid — Full Stack & Flutter Developer</title>
+
+<!-- PWA Manifest & Meta Tags -->
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Arshid Portfolio">
+<link rel="apple-touch-icon" href="icon-192.png">
+
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -224,74 +235,22 @@ footer { padding: 28px 40px; display: flex; justify-content: space-between; alig
 .mqi::after { content: '◈'; color: var(--gold); font-size: 7px; }
 .gr { opacity: 0; }
 
-/* Resume Prompt Modal - Instant & Reliable */
+/* Resume Prompt Modal */
 #resumePrompt { 
-  position: fixed; 
-  bottom: 30px; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  background: #1a1a1a; 
-  border: 1px solid var(--gold); 
-  border-radius: 12px; 
-  padding: 16px 24px; 
-  z-index: 10002; 
-  display: none; 
-  gap: 16px; 
-  backdrop-filter: blur(12px); 
-  font-family: var(--fm); 
-  font-size: 12px; 
-  align-items: center; 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  opacity: 1;
-  transition: none;
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); 
+  background: #1a1a1a; border: 1px solid var(--gold); border-radius: 12px; 
+  padding: 16px 24px; z-index: 10002; display: none; gap: 16px; 
+  backdrop-filter: blur(12px); font-family: var(--fm); font-size: 12px; 
+  align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
-#resumePrompt span { color: var(--white); letter-spacing: 0.3px; }
-.prompt-btn { 
-  background: transparent; 
-  border: 1px solid var(--gold); 
-  color: var(--gold); 
-  padding: 6px 16px; 
-  border-radius: 6px; 
-  cursor: pointer; 
-  font-family: var(--fm); 
-  font-size: 10px; 
-  font-weight: 500; 
-  transition: all 0.2s; 
-}
-.prompt-btn:hover { 
-  background: var(--gold); 
-  color: #0a0a0a; 
-  transform: translateY(-2px); 
-}
-.prompt-btn.primary { 
-  background: var(--gold); 
-  color: #0a0a0a; 
-}
-.prompt-btn.primary:hover { 
-  background: var(--gold-l); 
-}
-#closePrompt { 
-  background: none; 
-  border: none; 
-  color: #888; 
-  cursor: pointer; 
-  font-size: 14px; 
-  padding: 4px 8px; 
-  transition: color 0.2s; 
-}
-#closePrompt:hover { 
-  color: var(--gold); 
-}
-@media (max-width: 550px) { 
-  #resumePrompt { 
-    flex-wrap: wrap; 
-    justify-content: center; 
-    width: 90%; 
-    gap: 12px; 
-    bottom: 20px;
-    padding: 14px 18px;
-  } 
-}
+#resumePrompt span { color: var(--white); }
+.prompt-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); 
+  padding: 6px 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+.prompt-btn:hover { background: var(--gold); color: #0a0a0a; transform: translateY(-2px); }
+.prompt-btn.primary { background: var(--gold); color: #0a0a0a; }
+#closePrompt { background: none; border: none; color: #888; cursor: pointer; font-size: 14px; }
+#closePrompt:hover { color: var(--gold); }
+@media (max-width: 550px) { #resumePrompt { flex-wrap: wrap; width: 90%; gap: 12px; } }
 </style>
 </head>
 <body>
@@ -314,13 +273,7 @@ footer { padding: 28px 40px; display: flex; justify-content: space-between; alig
 <section id="contact" class="sec"><div class="secin"><div class="ctwrap"><div class="gr"><h2 class="ctag">Let's build something <em>real</em></h2><p class="csub">Whether it's a new project, collaboration, or just a conversation — I'm always open.</p><div class="clinks"><a href="mailto:arshidem0@gmail.com" class="clink"><span class="clinkic">✉</span><span>arshidem0@gmail.com</span></a><a href="tel:+918157875032" class="clink"><span class="clinkic">◎</span>+91 81578 75032</a><a href="https://www.linkedin.com/in/mohammed-arshid-em" target="_blank" class="clink"><span class="clinkic">⬡</span>LinkedIn Profile</a><a href="https://github.com/arshidem" target="_blank" class="clink"><span class="clinkic">◈</span>GitHub Profile</a></div></div><div class="gr"><div class="cform"><div><label class="flabel">Your Name</label><input class="fin" id="fn" type="text" placeholder="Mohammed Arshid" /></div><div><label class="flabel">Email</label><input class="fin" id="fe" type="email" placeholder="you@example.com" /></div><div><label class="flabel">Message</label><textarea class="fta" id="fm" placeholder="Tell me about your project..."></textarea></div><button class="btn-send" id="sendBtn"><span id="sbtn">Send Message →</span></button><div id="sstatus"></div></div></div></div></div></section>
 <footer><div class="fcopy">© 2026 Mohammed Arshid EM · Palakkad, Kerala</div><button class="fbk" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><path d="M6.5 10.5V2.5M2.5 6.5l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></footer>
 
-<!-- Resume Prompt Modal -->
-<div id="resumePrompt">
-  <span>📄 How would you like to open the resume?</span>
-  <button id="viewResume" class="prompt-btn primary">View in Browser</button>
-  <button id="downloadResumeBtn" class="prompt-btn">Download PDF</button>
-  <button id="closePrompt" title="Close">✕</button>
-</div>
+<div id="resumePrompt"><span>📄 How would you like to open the resume?</span><button id="viewResume" class="prompt-btn primary">View in Browser</button><button id="downloadResumeBtn" class="prompt-btn">Download PDF</button><button id="closePrompt">✕</button></div>
 
 <script>
 // disable custom cursor on mobile
@@ -344,13 +297,25 @@ class Part { constructor() { this.reset(true); } reset(init) { this.x = Math.ran
 for (let i = 0; i < 85; i++) particles.push(new Part());
 function animateParticles() { ctx.clearRect(0,0,w,h); particles.forEach(p => { p.update(); p.draw(); }); for (let i = 0; i < particles.length; i++) for (let j = i+1; j < particles.length; j++) { let dx = particles[i].x-particles[j].x, dy = particles[i].y-particles[j].y, dist = Math.hypot(dx,dy); if (dist < 100) { ctx.beginPath(); ctx.strokeStyle=`rgba(201,168,76,${0.08*(1-dist/100)})`; ctx.lineWidth=0.5; ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); } } requestAnimationFrame(animateParticles); }
 animateParticles();
-// Cursor only on desktop
-if (window.innerWidth > 900) {
-  const cdot = document.getElementById('cdot'), cring = document.getElementById('cring'); let mx = 0, my = 0, ringX = 0, ringY = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cdot.style.left = mx+'px'; cdot.style.top = my+'px'; });
-  function ringAnim() { ringX += (mx-ringX)*0.12; ringY += (my-ringY)*0.12; if(cring) { cring.style.left = ringX+'px'; cring.style.top = ringY+'px'; } requestAnimationFrame(ringAnim); } ringAnim();
-  document.querySelectorAll('a,button,.prjitem,.skcard,.certitem,.clink').forEach(el => { el.addEventListener('mouseenter', () => cring?.classList.add('big')); el.addEventListener('mouseleave', () => cring?.classList.remove('big')); });
-}
+
+// ========== FIXED CURSOR (runs after DOM ready) ==========
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.innerWidth > 900) {
+    const cdot = document.getElementById('cdot');
+    const cring = document.getElementById('cring');
+    if (cdot && cring) {
+      let mx = 0, my = 0, ringX = 0, ringY = 0;
+      document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; cdot.style.left = mx + 'px'; cdot.style.top = my + 'px'; });
+      function ringAnim() { ringX += (mx - ringX) * 0.12; ringY += (my - ringY) * 0.12; cring.style.left = ringX + 'px'; cring.style.top = ringY + 'px'; requestAnimationFrame(ringAnim); }
+      ringAnim();
+      document.querySelectorAll('a,button,.prjitem,.skcard,.certitem,.clink').forEach(function(el) { 
+        el.addEventListener('mouseenter', function() { cring.classList.add('big'); }); 
+        el.addEventListener('mouseleave', function() { cring.classList.remove('big'); }); 
+      });
+    }
+  }
+});
+
 // Marquee
 const mqtrack = document.getElementById('mqtrack'); const tags = ['Flutter','React.js','Node.js','Supabase','MongoDB','Dart','Firebase','Cloudflare R2','Express','Tailwind','PostgreSQL','RevenueCat']; for (let i = 0; i < 5; i++) tags.forEach(t => { let div = document.createElement('div'); div.className = 'mqi'; div.textContent = t; mqtrack.appendChild(div); });
 // Skill glow
@@ -371,105 +336,51 @@ hbg.addEventListener('click', openMenu); closeMenuBtn.addEventListener('click', 
 ['skills','projects','exp','about','contact'].forEach(id => { ScrollTrigger.create({ trigger: '#'+id, start: 'top 55%', onEnter: () => setActive(id), onEnterBack: () => setActive(id) }); });
 function setActive(id) { document.querySelectorAll('.nav-links a').forEach(a => { a.classList.toggle('act', a.getAttribute('href') === '#'+id); }); }
 
-// ========== RESUME PROMPT - INSTANT & RELIABLE with correct filename ==========
-// ========== RESUME PROMPT - WITH CACHE BUSTING ==========
+// ========== RESUME PROMPT WITH CACHE BUSTING ==========
 const resumeBtnEl = document.getElementById('resumeBtn');
 const promptDiv = document.getElementById('resumePrompt');
 const viewBtn = document.getElementById('viewResume');
 const downloadResumeBtn = document.getElementById('downloadResumeBtn');
 const closePromptBtn = document.getElementById('closePrompt');
 const RESUME_FILE = 'Mohammed_Arshid_Resume.pdf';
+function getResumeUrl() { return `${RESUME_FILE}?t=${new Date().getTime()}`; }
+function downloadResumeFile() { const link = document.createElement('a'); link.href = getResumeUrl(); link.download = RESUME_FILE; document.body.appendChild(link); link.click(); document.body.removeChild(link); }
+resumeBtnEl?.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); promptDiv.style.display = 'flex'; });
+viewBtn?.addEventListener('click', (e) => { e.preventDefault(); window.open(getResumeUrl(), '_blank'); promptDiv.style.display = 'none'; });
+downloadResumeBtn?.addEventListener('click', (e) => { e.preventDefault(); downloadResumeFile(); promptDiv.style.display = 'none'; });
+closePromptBtn?.addEventListener('click', () => { promptDiv.style.display = 'none'; });
+promptDiv?.addEventListener('click', (e) => { if (e.target === promptDiv) promptDiv.style.display = 'none'; });
 
-// Add cache-busting timestamp to force fresh file
-function getResumeUrl() {
-  const timestamp = new Date().getTime();
-  return `${RESUME_FILE}?t=${timestamp}`;
-}
-
-function downloadResumeFile() {
-  const link = document.createElement('a');
-  link.href = getResumeUrl();  // Forces fresh download
-  link.download = RESUME_FILE;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-resumeBtnEl?.addEventListener('click', (e) => { 
-  e.preventDefault();
-  e.stopPropagation();
-  promptDiv.style.display = 'flex';
-});
-
-viewBtn?.addEventListener('click', (e) => {
-  e.preventDefault();
-  window.open(getResumeUrl(), '_blank');  // Forces fresh view
-  promptDiv.style.display = 'none';
-});
-
-downloadResumeBtn?.addEventListener('click', (e) => {
-  e.preventDefault();
-  downloadResumeFile();
-  promptDiv.style.display = 'none';
-});
-
-closePromptBtn?.addEventListener('click', () => {
-  promptDiv.style.display = 'none';
-});
-
-promptDiv?.addEventListener('click', (e) => {
-  if (e.target === promptDiv) {
-    promptDiv.style.display = 'none';
-  }
-});
-
-// ========== FORM SUBMISSION FULLY WORKING (Formspree) ==========
+// ========== FORM SUBMISSION ==========
 document.getElementById('sendBtn')?.addEventListener('click', function() {
   const name = document.getElementById('fn').value.trim();
   const email = document.getElementById('fe').value.trim();
   const message = document.getElementById('fm').value.trim();
   const statusDiv = document.getElementById('sstatus');
   const btnSpan = document.getElementById('sbtn');
-  
-  if (!name || !email || !message) {
-    statusDiv.style.color = '#e07070';
-    statusDiv.textContent = '❌ Please fill all fields.';
-    return;
-  }
-  if (!email.includes('@') || !email.includes('.')) {
-    statusDiv.style.color = '#e07070';
-    statusDiv.textContent = '❌ Please enter a valid email address.';
-    return;
-  }
-  
-  btnSpan.textContent = 'Sending...';
-  statusDiv.style.color = 'var(--gold)';
-  statusDiv.textContent = 'Sending...';
-  
+  if (!name || !email || !message) { statusDiv.style.color = '#e07070'; statusDiv.textContent = '❌ Please fill all fields.'; return; }
+  if (!email.includes('@') || !email.includes('.')) { statusDiv.style.color = '#e07070'; statusDiv.textContent = '❌ Valid email required.'; return; }
+  btnSpan.textContent = 'Sending...'; statusDiv.style.color = 'var(--gold)'; statusDiv.textContent = 'Sending...';
   const formData = new FormData();
-  formData.append('name', name);
-  formData.append('_replyto', email);
-  formData.append('message', message);
-  formData.append('_subject', `Portfolio Contact from ${name}`);
-  
-  fetch('https://formspree.io/f/mlgowozy', {
-    method: 'POST',
-    body: formData,
-    mode: 'no-cors'
-  }).then(() => {
-    btnSpan.textContent = '✓ Sent!';
-    statusDiv.style.color = '#4ade80';
-    statusDiv.textContent = '✓ Message sent successfully! I will reply soon.';
-    document.getElementById('fn').value = '';
-    document.getElementById('fe').value = '';
-    document.getElementById('fm').value = '';
+  formData.append('name', name); formData.append('_replyto', email); formData.append('message', message); formData.append('_subject', `Portfolio Contact from ${name}`);
+  fetch('https://formspree.io/f/mlgowozy', { method: 'POST', body: formData, mode: 'no-cors' }).then(() => {
+    btnSpan.textContent = '✓ Sent!'; statusDiv.style.color = '#4ade80'; statusDiv.textContent = '✓ Message sent! I will reply soon.';
+    document.getElementById('fn').value = ''; document.getElementById('fe').value = ''; document.getElementById('fm').value = '';
     setTimeout(() => { btnSpan.textContent = 'Send Message →'; }, 3000);
-  }).catch(() => {
-    btnSpan.textContent = 'Send Message →';
-    statusDiv.style.color = '#e07070';
-    statusDiv.textContent = '❌ Error. Please email me directly.';
-  });
+  }).catch(() => { btnSpan.textContent = 'Send Message →'; statusDiv.style.color = '#e07070'; statusDiv.textContent = '❌ Error. Please email directly.'; });
 });
+
+// ========== PWA Service Worker Registration ==========
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(reg) {
+      console.log('✅ PWA Service Worker registered');
+    }).catch(function(err) {
+      console.log('❌ PWA registration failed:', err);
+    });
+  });
+}
 </script>
 </body>
 </html>
+```
