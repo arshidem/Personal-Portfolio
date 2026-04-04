@@ -130,9 +130,17 @@ body.light-mode nav { background: rgba(255,255,255,0.7); box-shadow: 0 20px 40px
 
 .hcard { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--border); padding: 40px; border-radius: 24px; opacity: 0; transform: translateY(30px); }
 .light-mode .hcard { background: rgba(255,255,255,0.7); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-.sgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-.snum { font-size: 48px; font-weight: 700; color: var(--gold); font-family: var(--fb); }
-.slbl { font-family: var(--fm); font-size: 11px; letter-spacing: 2px; color: var(--grey); text-transform: uppercase; margin-top: 8px; }
+
+.sgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px; }
+.sgrid > div { display: flex; flex-direction: column; justify-content: center; }
+.snum { font-size: 48px; font-weight: 700; color: var(--gold); font-family: var(--fb); line-height: 1; }
+.slbl { font-family: var(--fm); font-size: 11px; letter-spacing: 2px; color: var(--grey); text-transform: uppercase; margin-top: 8px; line-height: 1.4; }
+
+@media (max-width: 900px) {
+  .sgrid { gap: 20px; }
+  .snum { font-size: 36px; }
+  .slbl { font-size: 10px; letter-spacing: 1px; }
+}
 
 /* --- Sections --- */
 .sec { padding: 120px 40px; max-width: 1200px; margin: 0 auto; }
