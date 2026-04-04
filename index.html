@@ -124,58 +124,8 @@
         font-weight: 300;
         overflow-x: hidden;
       }
-      body.mobile-cursor-off {
-        cursor: auto;
-      }
+
       /* Custom cursor only on desktop (screen width > 900px) */
-      @media (min-width: 901px) {
-        body:not(.mobile-cursor-off) {
-          cursor: none;
-        }
-        #cdot,
-        #cring {
-          position: fixed;
-          border-radius: 50%;
-          pointer-events: none;
-          z-index: 9999;
-          transition: transform 0.15s ease;
-        }
-        #cdot {
-          width: 6px;
-          height: 6px;
-          background: var(--gold);
-          top: 0;
-          left: 0;
-          transform: translate3d(-50%, -50%, 0);
-          will-change: transform;
-        }
-        #cring {
-          width: 42px;
-          height: 42px;
-          border: 1.5px solid rgba(201, 168, 76, 0.65);
-          top: 0;
-          left: 0;
-          transform: translate3d(-50%, -50%, 0);
-          transition:
-            width 0.2s,
-            height 0.2s,
-            border-color 0.2s,
-            background 0.2s;
-          will-change: transform;
-        }
-        #cring.big {
-          width: 72px;
-          height: 72px;
-          background: rgba(201, 168, 76, 0.05);
-          border-color: var(--gold-l);
-        }
-      }
-      @media (max-width: 900px) {
-        #cdot,
-        #cring {
-          display: none !important;
-        }
-      }
 
       /* ── Loader with Animated Rings Around Icon ── */
       #loader {
@@ -1175,6 +1125,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 68px;
+        align-items: start;
       }
       @media (max-width: 900px) {
         .ctwrap {
@@ -1428,9 +1379,6 @@
       <div class="ld-bar-w"><div class="ld-bar" id="ldbar"></div></div>
       <div class="ld-pct" id="ldpct">0%</div>
     </div>
-
-    <div id="cdot"></div>
-    <div id="cring"></div>
 
     <!-- Navbar with 192.png Icon -->
     <nav id="mainnav">
@@ -2081,21 +2029,7 @@
       }
       animateParticles();
 
-      // ========== FIXED CURSOR (runs after DOM ready) ==========
-      document.addEventListener("DOMContentLoaded", function () {
-        if (window.innerWidth > 900) {
-          const cdot = document.getElementById("cdot");
-          const cring = document.getElementById("cring");
-          if (cdot && cring) {
-            let mx = 0,
-              my = 0,
-              ringX = 0,
-              ringY = 0;
-            document.addEventListener("mousemove", function (e) {
-              mx = e.clientX;
-              my = e.clientY;
-              cdot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
-            });
+
             function ringAnim() {
               ringX += (mx - ringX) * 0.35;
               ringY += (my - ringY) * 0.35;
