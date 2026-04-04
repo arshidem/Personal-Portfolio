@@ -802,14 +802,24 @@
       }
       .sgrid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 32px;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+      }
+      .sgrid > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
       .snum {
         font-family: var(--fd);
-        font-size: 32px;
-        color: var(--white);
+        font-size: 42px;
+        color: var(--gold);
         line-height: 1;
+        margin-bottom: 8px;
       }
       .slbl {
         font-family: var(--fm);
@@ -1853,15 +1863,15 @@
 
     <section id="contact" class="sec">
       <div class="secin">
-        <h2 class="ctag gr" style="margin-bottom: 32px">
-          Let's build something <em>real</em>
-        </h2>
+        <div class="gr" style="text-align: center; margin-bottom: 56px">
+          <h2 class="ctag">Let's build something <em>real</em></h2>
+          <p class="csub" style="max-width: 600px; margin: 0 auto">
+            Whether it's a new project, collaboration, or just a conversation
+            — I'm always open.
+          </p>
+        </div>
         <div class="ctwrap">
           <div class="gr">
-            <p class="csub">
-              Whether it's a new project, collaboration, or just a conversation
-              — I'm always open.
-            </p>
             <div class="clinks">
               <a href="mailto:arshidem0@gmail.com" class="clink"
                 ><span class="clinkic">✉</span
