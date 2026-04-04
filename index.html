@@ -2030,27 +2030,6 @@
       animateParticles();
 
 
-            function ringAnim() {
-              ringX += (mx - ringX) * 0.35;
-              ringY += (my - ringY) * 0.35;
-              cring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-              requestAnimationFrame(ringAnim);
-            }
-            ringAnim();
-            document
-              .querySelectorAll("a,button,.prjitem,.skcard,.certitem,.clink")
-              .forEach(function (el) {
-                el.addEventListener("mouseenter", function () {
-                  cring.classList.add("big");
-                });
-                el.addEventListener("mouseleave", function () {
-                  cring.classList.remove("big");
-                });
-              });
-          }
-        }
-      });
-
       // Marquee
       const mqtrack = document.getElementById("mqtrack");
       const tags = [
