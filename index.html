@@ -55,6 +55,11 @@
         --fm: "JetBrains Mono", monospace;
         --fb: "Outfit", sans-serif;
         --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --nav-bg: rgba(10, 10, 10, 0.92);
+        --card-bg: rgba(18, 18, 18, 0.7);
+        --text-muted: rgba(240, 236, 228, 0.55);
+        --stroke: rgba(255, 255, 255, 0.06);
+        --footer-bg: #050505;
       }
       :root.light {
         --bg: #f5f2eb;
@@ -68,6 +73,11 @@
         --off: #4a4845;
         --grey: #8a857e;
         --border: rgba(179, 139, 34, 0.25);
+        --nav-bg: rgba(255, 255, 255, 0.85);
+        --card-bg: rgba(255, 255, 255, 0.8);
+        --text-muted: rgba(26, 26, 26, 0.6);
+        --stroke: rgba(0, 0, 0, 0.06);
+        --footer-bg: var(--bg2);
       }
       .theme-toggle {
         position: fixed;
@@ -268,7 +278,7 @@
         left: 50%;
         transform: translateX(-50%);
         z-index: 1000;
-        background: rgba(10, 10, 10, 0.92);
+        background: var(--nav-bg);
         backdrop-filter: blur(28px);
         border-radius: 12px;
         padding: 8px 24px;
@@ -408,7 +418,7 @@
         right: 0;
         bottom: 0;
         width: min(320px, 100vw);
-        background: #0e0e0e;
+        background: var(--bg2);
         border-left: 1px solid var(--border);
         display: flex;
         flex-direction: column;
@@ -473,7 +483,7 @@
         padding: 14px 16px;
         font-family: var(--fd);
         font-size: 26px;
-        color: rgba(240, 236, 228, 0.55);
+        color: var(--text-muted);
         text-decoration: none;
         border-radius: 12px;
         transition: all 0.25s;
@@ -707,7 +717,7 @@
       .hdesc {
         font-size: 15px;
         line-height: 1.75;
-        color: rgba(240, 236, 228, 0.6);
+        color: var(--text-muted);
         max-width: 480px;
         margin: 0 auto 48px;
         opacity: 0;
@@ -882,7 +892,7 @@
         padding: 4px 10px;
         font-family: var(--fm);
         font-size: 9px;
-        color: rgba(240, 236, 228, 0.5);
+        color: var(--text-muted);
         border: 1px solid rgba(255, 255, 255, 0.06);
       }
 
@@ -940,7 +950,7 @@
       .prjdesc {
         font-size: 13px;
         line-height: 1.7;
-        color: rgba(240, 236, 228, 0.55);
+        color: var(--text-muted);
         margin-bottom: 18px;
       }
       .prjstack {
@@ -1055,7 +1065,7 @@
       .abtxt p {
         font-size: 14px;
         line-height: 1.85;
-        color: rgba(240, 236, 228, 0.55);
+        color: var(--text-muted);
         margin-bottom: 20px;
       }
       .abtxt .big {
@@ -1185,7 +1195,7 @@
       }
       .csub {
         font-size: 13px;
-        color: rgba(240, 236, 228, 0.55);
+        color: var(--text-muted);
         margin-bottom: 32px;
         line-height: 1.6;
       }
@@ -1232,7 +1242,7 @@
         border-radius: 12px;
         width: 100%;
         background: var(--bg3);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--stroke);
         border-bottom: 1px solid var(--border);
         padding: 12px 14px;
         color: var(--white);
@@ -1279,8 +1289,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        background: #050505;
+        border-top: 1px solid var(--stroke);
+        background: var(--footer-bg);
       }
       @media (max-width: 700px) {
         footer {
@@ -1355,7 +1365,7 @@
         max-width: 100%;
         border-radius: 12px;
         margin-top: 0;
-        background: rgba(18, 18, 18, 0.75);
+        background: var(--card-bg);
         backdrop-filter: blur(12px);
         padding: 48px;
         border: 1px solid var(--border);
@@ -1374,7 +1384,7 @@
         bottom: 30px;
         left: 50%;
         transform: translateX(-50%);
-        background: #1a1a1a;
+        background: var(--bg3);
         border: 1px solid var(--gold);
         border-radius: 12px;
         padding: 16px 24px;
@@ -1843,9 +1853,11 @@
 
     <section id="contact" class="sec">
       <div class="secin">
+        <h2 class="ctag gr" style="margin-bottom: 32px">
+          Let's build something <em>real</em>
+        </h2>
         <div class="ctwrap">
           <div class="gr">
-            <h2 class="ctag">Let's build something <em>real</em></h2>
             <p class="csub">
               Whether it's a new project, collaboration, or just a conversation
               — I'm always open.
