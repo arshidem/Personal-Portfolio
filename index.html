@@ -1,185 +1,616 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Mohammed Arshid — Full Stack & Flutter Developer. Building scalable web and mobile applications from the ground up.">
-  <meta name="theme-color" content="#c9a84c">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Mohammed Arshid — Full Stack & Flutter Developer. Building scalable web and mobile applications with React, Node.js, Flutter, Supabase. View portfolio, projects and contact.">
+<meta name="theme-color" content="#080808">
 
-  <!-- OpenGraph / Premium Social Tags -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://arshidem.github.io/"> 
-  <meta property="og:title" content="Mohammed Arshid — Full Stack Specialist">
-  <meta property="og:description" content="Crafting high-performance digital experiences across mobile and web.">
-  <meta property="og:image" content="https://arshidem.github.io/icon-512.png">
+<!-- OpenGraph / Premium Social Tags -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arshidem.github.io/"> 
+<meta property="og:title" content="Mohammed Arshid — Full Stack & Flutter Developer">
+<meta property="og:description" content="Building scalable web and mobile applications from the ground up. Expert in Flutter, MERN, and Supabase.">
+<meta property="og:image" content="https://arshidem.github.io/icon-512.png">
 
-  <title>Mohammed Arshid — Full Stack & Flutter Developer</title>
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://arshidem.github.io/">
+<meta property="twitter:title" content="Mohammed Arshid — Full Stack & Flutter Developer">
+<meta property="twitter:description" content="Building scalable web and mobile applications from the ground up. Expert in Flutter, MERN, and Supabase.">
+<meta property="twitter:image" content="https://arshidem.github.io/icon-512.png">
 
-  <!-- PWA Manifest & Meta Tags -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>Mohammed Arshid — Full Stack & Flutter Developer</title>
 
-  <!-- External Resources -->
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> 
+<!-- PWA Manifest & Meta Tags -->
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Arshid Portfolio">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<!-- Browser Tab Icon (Favicon) -->
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="shortcut icon" href="icon-192.png">
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<!-- Lenis Smooth Scroll -->
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> 
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+:root {
+  --bg: #080808; --bg2: #0d0d0d; --bg3: #121212; --bg4: #191919;
+  --gold: #c9a84c; --gold-l: #e0bc6e; --gold-d: rgba(201,168,76,0.18);
+  --white: #f0ece4; --off: #b8b0a4; --grey: #6a6560;
+  --border: rgba(201,168,76,0.12);
+  --glass: rgba(255,255,255,0.03);
+  --fd: 'DM Serif Display', serif; --fm: 'JetBrains Mono', monospace; --fb: 'Outfit', sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.light-mode {
+  --bg: #fafaf8; --bg2: #ffffff; --bg3: #f0f0ec; --bg4: #e6e6e0;
+  --gold: #a68226; --gold-l: #c9a84c; --gold-d: rgba(166,130,38,0.1);
+  --white: #121212; --off: #444444; --grey: #777777;
+  --border: rgba(166,130,38,0.15);
+  --glass: rgba(0,0,0,0.02);
+}
+
+html.lenis { height: auto; }
+.lenis-smooth { scroll-behavior: auto !important; }
+.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis-stopped { overflow: hidden; }
+
+body { background: var(--bg); color: var(--white); font-family: var(--fb); font-weight: 300; overflow-x: hidden; transition: background 0.5s var(--ease), color 0.5s var(--ease); }
+
+/* ── Theme Toggle ── */
+.tmode { 
+  display: flex !important; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--gold); 
+  align-items: center; justify-content: center; cursor: pointer;
+  background: var(--gold); color: #080808; transition: all 0.3s var(--ease);
+  box-shadow: 0 0 15px rgba(201,168,76,0.5); /* Glowing for max visibility */
+}
+.tmode:hover { transform: scale(1.1) rotate(15deg); }
+.tmode svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.light-mode .tmode .sun { display: none; }
+.tmode .moon { display: none; }
+.light-mode .tmode .moon { display: block; }
+body:not(.light-mode) .tmode .sun { display: block; }
+
+/* ── Premium Cursor ── */
+@media (min-width: 901px) {
+  body:not(.mobile-cursor-off) { cursor: none; }
+  #cdot, #cring { position: fixed; top: 0; left: 0; border-radius: 50%; pointer-events: none; z-index: 9999; opacity: 0; transform: translate(-50%, -50%); transition: opacity 0.3s; }
+  #cdot { width: 8px; height: 8px; background: var(--gold); }
+  #cring { width: 36px; height: 36px; border: 1.2px solid rgba(201,168,76,0.5); transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s var(--ease), opacity 0.3s; }
+  #cring.big { width: 70px; height: 70px; background: rgba(201,168,76,0.1); border-color: var(--gold-l); }
+}
+@media (max-width: 900px) {
+  #cdot, #cring { display: none !important; }
+}
+
+/* ── Light Mode Adjustments ── */
+.light-mode .hcard, .light-mode .skcard, .light-mode .prjitem { 
+  background: rgba(255,255,255,0.7); 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+}
+.light-mode #loader { background: #fafaf8; }
+.light-mode .ld-bar-w { background: rgba(0,0,0,0.05); }
+.light-mode nav { background: rgba(255,255,255,0.7); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+.light-mode .fin, .light-mode .fta { background: rgba(0,0,0,0.02); color: var(--white); }
+
+/* ── Loader ── */
+#loader { position: fixed; inset: 0; background: #030303; z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px; transition: 0.5s; }
+.ld-icon { position: relative; width: 100px; height: 100px; }
+.icon-ring { position: absolute; inset: -10px; border-radius: 9999px; background: linear-gradient(135deg, var(--gold), #ffd700, var(--gold-l), #ffed8a); animation: spinRing 1.8s linear infinite; }
+.icon-ring::before { content: ''; position: absolute; inset: 4px; border-radius: 9999px; background: var(--bg); }
+.icon-ring-outer { position: absolute; inset: -18px; border-radius: 9999px; background: linear-gradient(225deg, var(--gold-l), rgba(201,168,76,0.3), var(--gold)); animation: spinRingReverse 2.2s linear infinite; opacity: 0.6; }
+.icon-ring-outer::before { content: ''; position: absolute; inset: 3px; border-radius: 9999px; background: var(--bg); }
+#loaderIcon { position: relative; width: 100%; height: 100%; border-radius: 9999px; object-fit: cover; z-index: 2; animation: iconPulse 1.2s ease-in-out infinite alternate; box-shadow: 0 0 20px rgba(201,168,76,0.3); }
+@keyframes spinRing { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes spinRingReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+@keyframes iconPulse { from { transform: scale(0.94); opacity: 0.8; } to { transform: scale(1.06); opacity: 1; } }
+.ld-name { font-family: var(--fd); font-size: clamp(28px,8vw,70px); display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; overflow: hidden; }
+.ld-name span { display: inline-block; transform: translateY(100%); opacity: 0; }
+.ld-name span:first-child { color: var(--white); }
+.ld-name span:last-child { color: var(--gold); font-style: italic; }
+.ld-bar-w { width: 220px; height: 2px; background: rgba(255,255,255,0.05); }
+.ld-bar { width: 0%; height: 100%; background: var(--gold); }
+.ld-pct { font-family: var(--fm); font-size: 12px; letter-spacing: 2px; color: var(--gold); }
+
+/* ── Navbar ── */
+nav {
+  position: fixed; top: 32px; left: 50%; transform: translateX(-50%);
+  z-index: 1000; background: rgba(10,10,10,0.65); backdrop-filter: blur(24px);
+  border-radius: 9999px; padding: 6px 32px;
+  display: flex; align-items: center; gap: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  border: 1px solid var(--border); width: auto; min-width: 320px;
+  justify-content: space-between;
+}
+.nav-brand { font-family: var(--fm); font-size: 14px; font-weight: 500; color: var(--gold); letter-spacing: 1px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.nav-brand img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); }
+.nav-links { display: flex; gap: 16px; list-style: none; align-items: center; }
+.nav-links a { font-family: var(--fm); font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); padding: 8px 16px; border-radius: 9999px; transition: all 0.3s var(--ease); text-decoration: none; font-weight: 500; }
+.nav-links a:hover, .nav-links a.act { background: var(--gold-d); color: var(--gold); }
+.nav-cta { padding: 9px 24px; background: var(--gold); color: #0a0a0a; font-family: var(--fm); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; border-radius: 9999px; font-weight: 700; text-decoration: none; transition: all 0.3s var(--ease); }
+.nav-cta:hover { background: var(--gold-l); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(201,168,76,0.3); }
+.hbg { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+.hbg span { display: block; width: 22px; height: 1.8px; background: var(--white); transition: all 0.4s var(--ease); border-radius: 2px; }
+.hbg.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hbg.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hbg.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 900px) {
+  nav { width: 90%; max-width: 420px; padding: 8px 18px; top: 16px; gap: 16px; }
+  .nav-links, .nav-cta { display: none; }
+  .hbg { display: flex; }
+}
+
+/* ── Mobile Menu ── */
+#mobileMenu { position: fixed; inset: 0; z-index: 1100; pointer-events: none; visibility: hidden; }
+#mobileMenu.op { pointer-events: all; visibility: visible; }
+#menuBackdrop { position: absolute; inset: 0; background: rgba(3,3,3,0.85); opacity: 0; transition: opacity 0.4s var(--ease); }
+#mobileMenu.op #menuBackdrop { opacity: 1; }
+.mobile-content { position: absolute; top: 0; right: 0; bottom: 0; width: min(340px, 100vw); background: #0e0e0e; border-left: 1px solid var(--border); display: flex; flex-direction: column; transform: translateX(100%); opacity: 0; }
+.menu-header { display: flex; align-items: center; justify-content: space-between; padding: 32px 28px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.menu-brand { font-family: var(--fm); font-size: 13px; font-weight: 500; color: var(--gold); letter-spacing: 0.1em; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.menu-brand img { width: 28px; height: 28px; border-radius: 50%; }
+.close-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--glass); border: 1px solid rgba(255,255,255,0.05); color: var(--white); cursor: pointer; transition: 0.3s; }
+.close-btn:hover { background: var(--gold-d); color: var(--gold); transform: rotate(90deg); }
+.menu-links { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 28px; gap: 12px; }
+.menu-links a { font-family: var(--fd); font-size: 32px; color: rgba(240,236,228,0.4); text-decoration: none; transition: 0.3s var(--ease); }
+.menu-links a:hover { color: var(--gold); transform: translateX(12px); }
+.menu-footer { padding: 32px 28px; border-top: 1px solid rgba(255,255,255,0.03); }
+
+/* ── Hero ── */
+#hero { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; padding: 140px 40px 80px; position: relative; overflow: hidden; }
+@media (max-width: 900px) { #hero { grid-template-columns: 1fr; padding: 120px 24px 80px; gap: 60px; } }
+#pcanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.5; pointer-events: none; }
+.hgrid { position: absolute; inset: 0; background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 40px 40px; mask-image: radial-gradient(circle at center, black, transparent); z-index: 0; opacity: 0.5; }
+.hl, .hr { position: relative; z-index: 2; }
+.htag { display: inline-flex; align-items: center; gap: 10px; font-family: var(--fm); font-size: 10px; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 32px; opacity: 0; transform: translateY(20px); }
+.htag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); position: relative; }
+.htag-dot::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--gold); animation: pulseOuter 2s infinite; }
+@keyframes pulseOuter { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
+.hname { font-family: var(--fd); font-size: clamp(52px,8vw,100px); line-height: 0.92; margin-bottom: 24px; letter-spacing: -0.02em; }
+.hnrow { overflow: hidden; display: block; }
+.hnin { display: inline-block; transform: translateY(110%); }
+.hrole { font-family: var(--fm); font-size: 14px; color: var(--grey); margin-bottom: 32px; opacity: 0; transform: translateY(20px); }
+#tcur { display: inline-block; width: 6px; height: 1.2px; background: var(--gold); margin-left: 6px; vertical-align: middle; animation: blink 0.8s infinite; }
+.hdesc { font-size: 16px; line-height: 1.8; color: var(--off); max-width: 520px; margin-bottom: 48px; opacity: 0; transform: translateY(20px); }
+.hctas { display: flex; gap: 16px; flex-wrap: wrap; opacity: 0; transform: translateY(20px); }
+.btn-g, .btn-o { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; font-family: var(--fm); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; font-weight: 600; border-radius: 4px; transition: 0.3s var(--ease); cursor: pointer; }
+.btn-g { background: var(--gold); color: #080808; }
+.btn-g:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(201,168,76,0.3); }
+.btn-o { border: 1px solid var(--border); background: var(--glass); color: var(--off); backdrop-filter: blur(8px); }
+.btn-o:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-4px); background: var(--gold-d); }
+.hcard { width: min(380px,100%); background: rgba(18,18,18,0.4); backdrop-filter: blur(12px); border: 1px solid var(--border); padding: 40px; border-radius: 32px; opacity: 0; transform: translateY(40px); transition: 0.5s var(--ease); }
+.hcard:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
+
+/* Scroll Down */
+.scrolldown { position: absolute; bottom: 40px; left: 40px; display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; transform: translateY(20px); }
+.sd-line { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent); animation: sdLine 2s infinite; transform-origin: top; }
+.sd-txt { font-family: var(--fm); font-size: 8px; color: var(--grey); letter-spacing: 0.3em; text-transform: uppercase; writing-mode: vertical-lr; }
+@keyframes sdLine { 0% { transform: scaleY(0); opacity: 0; } 50% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; transform: translateY(20px); } }
+
+/* Skills & Projects Premium */
+.sec { padding: 120px 40px; max-width: 1400px; margin: 0 auto; }
+@media (max-width: 900px) { .sec { padding: 80px 24px; } }
+.eytxt { letter-spacing: 0.3em; font-family: var(--fm); font-size: 12px; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; display: block; }
+.stitle { font-family: var(--fd); font-size: clamp(36px, 5vw, 64px); margin-bottom: 60px; }
+.stitle em { color: var(--gold); font-style: italic; }
+
+.skgrid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .skgrid { grid-template-columns: 1fr; } }
+.skcard { background: rgba(18,18,18,0.4); backdrop-filter: blur(10px); border: 1px solid var(--border); padding: 40px 32px; border-radius: 20px; transition: 0.4s var(--ease); }
+.skcard:hover { border-color: var(--gold); transform: translateY(-8px); background: rgba(20,20,20,0.6); }
+.skicon { font-size: 24px; color: var(--gold); margin-bottom: 20px; transition: 0.3s; display: block;}
+.skname { font-family: var(--fb); font-size: 24px; margin-bottom: 16px; font-weight: 500; }
+.sktags { display: flex; flex-wrap: wrap; gap: 8px; }
+.sktag { padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: 9999px; font-family: var(--fm); font-size: 11px; color: var(--off); }
+.skcard:hover .skicon { transform: scale(1.2) rotate(10deg); }
+
+.prjlist { display: flex; flex-direction: column; gap: 16px; }
+.prjitem { display: grid; grid-template-columns: 80px 1fr 40px; background: rgba(18,18,18,0.3); backdrop-filter: blur(8px); border: 1px solid var(--border); padding: 48px 40px; border-radius: 24px; transition: 0.5s var(--ease); text-decoration: none; color: inherit; align-items: center; }
+@media (max-width: 900px) { .prjitem { grid-template-columns: 1fr; gap: 24px; padding: 32px 24px; } }
+.prjitem:hover { border-color: var(--gold); background: rgba(25,25,25,0.5); transform: scale(1.01) translateY(-4px); box-shadow: 0 40px 80px rgba(0,0,0,0.4); }
+.prjnum { font-size: 56px; font-family: var(--fd); opacity: 0.1; transition: 0.4s; }
+.prjitem:hover .prjnum { opacity: 0.4; color: var(--gold); }
+.prjname { font-size: 32px; font-family: var(--fb); font-weight: 500; margin-bottom: 8px; }
+.prjbadge { font-family: var(--fm); font-size: 11px; color: var(--gold); letter-spacing: 1px; display: block; margin-bottom: 16px; }
+.prjdesc { color: var(--off); line-height: 1.6; margin-bottom: 24px; max-width: 600px; }
+.prjstack { display: flex; gap: 12px; flex-wrap: wrap; }
+.stag { font-family: var(--fm); font-size: 10px; color: var(--grey); text-transform: uppercase; letter-spacing: 1px; }
+.prjarr { font-size: 32px; color: var(--white); justify-self: center; transition: 0.3s; }
+.prjitem:hover .prjarr { color: var(--gold); transform: translateX(8px) rotate(-45deg); }
+
+.tl { display: flex; flex-direction: column; gap: 40px; position: relative; padding-left: 24px; border-left: 1px solid var(--border); }
+.tlitem { position: relative; padding-left: 32px; }
+.tldot { position: absolute; left: -30px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--glass); border: 2px solid var(--gold); box-shadow: 0 0 10px rgba(201,168,76,0.2); }
+.tlperiod { font-family: var(--fm); font-size: 12px; color: var(--gold); letter-spacing: 1px; margin-bottom: 8px; }
+.tlrole { font-size: 24px; font-family: var(--fb); font-weight: 600; margin-bottom: 4px; }
+.tlorg { font-size: 16px; color: var(--off); margin-bottom: 16px; }
+.tldesc { color: var(--grey); line-height: 1.6; max-width: 500px; }
+
+.aboutgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+@media (max-width: 900px) { .aboutgrid { grid-template-columns: 1fr; gap: 40px; } }
+.abtxt p { font-size: 18px; color: var(--off); line-height: 1.8; margin-bottom: 24px; }
+.abtxt p.big { font-family: var(--fd); font-size: 32px; color: var(--white); margin-bottom: 32px; line-height: 1.3; }
+
+/* Contact Form Premium */
+.ctwrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+@media (max-width: 900px) { .ctwrap { grid-template-columns: 1fr; gap: 60px; } }
+.csub { color: var(--off); line-height: 1.6; margin-bottom: 40px; font-size: 18px; }
+.clinks { display: flex; flex-direction: column; gap: 16px; }
+.clink { display: inline-flex; align-items: center; gap: 16px; font-family: var(--fm); color: var(--white); text-decoration: none; font-size: 14px; transition: 0.3s; }
+.clink span { color: var(--gold); font-size: 18px; }
+.clink:hover { color: var(--gold); transform: translateX(8px); }
+
+.fin, .fta { width: 100%; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: 0.3s; color: var(--white); outline: none; margin-bottom: 16px; font-family: var(--fb); font-size: 16px; }
+.fta { min-height: 160px; resize: vertical; }
+.fin:focus, .fta:focus { background: rgba(201,168,76,0.04); border-color: var(--gold); box-shadow: 0 0 20px rgba(201,168,76,0.1); }
+.btn-send { width: 100%; background: var(--gold); border: none; border-radius: 12px; height: 60px; color: #080808; font-family: var(--fm); font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px; }
+.btn-send:hover { background: var(--gold-l); transform: translateY(-4px); box-shadow: 0 10px 20px rgba(201,168,76,0.2); }
+#sstatus { margin-top: 16px; font-family: var(--fm); font-size: 12px; color: var(--gold); text-align: center; height: 20px; }
+
+footer { padding: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.fcopy { font-family: var(--fm); font-size: 11px; color: var(--grey); letter-spacing: 1px; }
+.fbk { font-family: var(--fm); font-size: 11px; color: var(--white); background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+.fbk:hover { color: var(--gold); }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 10px; transition: 0.3s; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* Animation Classes */
+.gr { opacity: 0; }
+</style>
 </head>
 <body>
 
-  <!-- Loading Sequence -->
-  <div id="loader">
-    <div class="ld-icon">
-      <div class="icon-ring-outer"></div>
-      <div class="icon-ring"></div>
-      <img src="icon-192.png" alt="Logo" id="loaderIcon">
-    </div>
-    <div class="ld-bar-w"><div class="ld-bar" id="ldbar"></div></div>
+<div id="loader">
+  <div class="ld-icon">
+    <div class="icon-ring-outer"></div>
+    <div class="icon-ring"></div>
+    <img src="icon-192.png" alt="Logo" id="loaderIcon">
   </div>
+  <div class="ld-name"><span>Mohammed</span><span>Arshid</span></div>
+  <div class="ld-bar-w"><div class="ld-bar" id="ldbar"></div></div>
+  <div class="ld-pct" id="ldpct">0%</div>
+</div>
 
-  <!-- Custom Cursor Engine -->
-  <div id="cdot"></div><div id="cring"></div>
+<div id="cdot"></div><div id="cring"></div>
 
-  <!-- Main Navigation -->
-  <nav id="mainnav">
-    <a href="#hero" class="nav-brand">
-      <img src="icon-192.png" alt="MA">
-      <span>MA.DEV</span>
+<nav id="mainnav">
+  <a href="#hero" class="nav-brand">
+    <img src="icon-192.png" alt="MA">
+    <span>MA.DEV</span>
+  </a>
+  <div style="display:flex; align-items:center; gap:24px;">
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#exp">Journey</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+    <div class="tmode" id="tmode" title="Toggle Dark/Light Mode">
+      <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </div>
+    <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div id="mobileMenu">
+  <div id="menuBackdrop"></div>
+  <div class="mobile-content" id="menuCard">
+    <div class="menu-header">
+      <a href="#hero" class="menu-brand" onclick="closeMobile()"><img src="icon-192.png" alt="MA">MA.DEV</a>
+      <button class="close-btn" id="closeMenu">✕</button>
+    </div>
+    <div class="menu-links">
+      <a href="#skills" onclick="closeMobile()">Skills</a>
+      <a href="#projects" onclick="closeMobile()">Work</a>
+      <a href="#exp" onclick="closeMobile()">Journey</a>
+      <a href="#about" onclick="closeMobile()">About</a>
+    </div>
+    <div class="menu-footer">
+      <a href="#contact" class="nav-cta" style="display: block; text-align: center;" onclick="closeMobile()">Get in Touch</a>
+    </div>
+  </div>
+</div>
+
+<section id="hero">
+  <canvas id="pcanvas"></canvas>
+  <div class="hgrid"></div>
+  <div class="hl">
+    <div class="htag" id="htag"><span class="htag-dot"></span>Available for new projects</div>
+    <h1 class="hname">
+      <span class="hnrow"><span class="hnin" id="hn1">Mohammed</span></span>
+      <span class="hnrow"><span class="hnin" id="hn2" style="color:var(--gold);font-style:italic">Arshid</span></span>
+    </h1>
+    <p class="hrole" id="hrole">
+      <span id="ttext"></span><span id="tcur"></span>
+    </p>
+    <p class="hdesc" id="hdesc">Crafting high-performance digital experiences across mobile and web. Specializing in Flutter, MERN, and scalable cloud architectures.</p>
+    <div class="hctas" id="hctas">
+      <a href="#projects" class="btn-g mag">View Work →</a>
+      <a href="#" class="btn-o mag" id="resumeBtn">Resume ↓</a>
+    </div>
+  </div>
+  <div class="hr">
+    <div class="hcard" id="hcard">
+      <div class="clabel" style="font-family: var(--fm); font-size: 10px; color: var(--gold); margin-bottom: 24px; letter-spacing: 2px;">// SYSTEM STATUS: REIFIED</div>
+      <div class="sgrid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <div><div class="snum cval" data-v="2" style="font-size: 40px; font-weight: 700; color: var(--gold);">0</div><div class="slbl" style="font-size: 10px; letter-spacing: 2px; opacity: 0.5;">PROD APPS</div></div>
+        <div><div class="snum cval" data-v="21" style="font-size: 40px; font-weight: 700; color: var(--gold);">0</div><div class="slbl" style="font-size: 10px; letter-spacing: 2px; opacity: 0.5;">YEARS OLD</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scrolldown" id="sd">
+    <div class="sd-txt">Scroll to explore</div>
+    <div class="sd-line"></div>
+  </div>
+</section>
+
+<section id="skills" class="sec">
+  <div class="ey"><div class="eyline"></div><span class="eytxt">Expertise</span></div>
+  <h2 class="stitle gr">Engineered for <em>performance</em></h2>
+  <div class="skgrid">
+    <div class="skcard gr">
+      <span class="skicon">◈</span>
+      <div class="skname">Frontend</div>
+      <div class="sktags">
+        <span class="sktag">React.js</span><span class="sktag">Next.js</span><span class="sktag">Tailwind</span><span class="sktag">GSAP</span>
+      </div>
+    </div>
+    <div class="skcard gr">
+      <span class="skicon">⬡</span>
+      <div class="skname">Backend</div>
+      <div class="sktags">
+        <span class="sktag">Node.js</span><span class="sktag">Express</span><span class="sktag">Supabase</span><span class="sktag">Go</span>
+      </div>
+    </div>
+    <div class="skcard gr">
+      <span class="skicon">◉</span>
+      <div class="skname">Mobile</div>
+      <div class="sktags">
+        <span class="sktag">Flutter</span><span class="sktag">Dart</span><span class="sktag">Riverpod</span><span class="sktag">Firebase</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="sec">
+  <div class="ey"><div class="eyline"></div><span class="eytxt">Case Studies</span></div>
+  <h2 class="stitle gr">Selected <em>impact</em></h2>
+  <div class="prjlist">
+    <div class="prjitem gr">
+      <div class="prjnum">01</div>
+      <div>
+        <div class="prjhead"><div class="prjname">KoFund</div><span class="prjbadge">Flutter · Firebase</span></div>
+        <p class="prjdesc">Empowering communities with secure contribution tracking, real-time push notifications, and automated fund management.</p>
+        <div class="prjstack"><span class="stag">Flutter</span><span class="stag">Cloud Functions</span><span class="stag">FCM</span><span class="stag">Riverpod</span></div>
+      </div>
+      <div class="prjarr">→</div>
+    </div>
+    <a href="https://nike-redesign-delta.vercel.app" target="_blank" class="prjitem gr">
+      <div class="prjnum">02</div>
+      <div>
+        <div class="prjhead"><div class="prjname">Nike Redesign</div><span class="prjbadge">MERN · Commerce</span></div>
+        <p class="prjdesc">A high-conversion e-commerce platform featuring seamless Razorpay checkout, PWA capabilities, and an advanced admin dashboard.</p>
+        <div class="prjstack"><span class="stag">React</span><span class="stag">MongoDB</span><span class="stag">Razorpay</span><span class="stag">Express</span></div>
+      </div>
+      <div class="prjarr">↗</div>
     </a>
-    
-    <div class="nav-actions">
-      <ul class="nav-links">
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Work</a></li>
-        <li><a href="#exp">Trajectory</a></li>
-      </ul>
-      <button class="hbg" id="hbg"><span></span><span></span></button>
+  </div>
+</section>
+
+<section id="exp" class="sec">
+  <div class="ey"><div class="eyline"></div><span class="eytxt">Trajectory</span></div>
+  <h2 class="stitle gr">The <em>evolution</em></h2>
+  <div class="tl">
+    <div class="tlitem gr">
+      <div class="tldot"></div>
+      <div class="tlperiod">Current</div>
+      <div class="tlrole">Production Excellence</div>
+      <div class="tlorg">Independent Developer</div>
+      <p class="tldesc">Building and launching production-ready apps like KoFund, handling end-to-end development from UI to DevOps.</p>
     </div>
-  </nav>
+    <div class="tlitem gr">
+      <div class="tldot"></div>
+      <div class="tlperiod">2025</div>
+      <div class="tlrole">MERN Specialization</div>
+      <div class="tlorg">OneTeam Solutions</div>
+      <p class="tldesc">Mastered full-stack engineering with a focus on scalable database design and secure payment integrations.</p>
+    </div>
+  </div>
+</section>
 
-  <!-- UNMISSABLE FLOATING THEME TOGGLE -->
-  <button id="floatingToggle" style="
-    position: fixed; 
-    bottom: 30px; 
-    right: 30px; 
-    z-index: 999999; 
-    width: 65px; 
-    height: 65px; 
-    border-radius: 50%; 
-    background: #c9a84c; 
-    color: #080808; 
-    border: 3px solid #080808;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(201,168,76,0.6);
-    cursor: pointer;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    transition: transform 0.3s;
-  " onmouseover="this.style.transform='scale(1.1) rotate(15deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'" onclick="document.body.classList.toggle('light-mode'); localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark')">
-    <svg style="width:30px; height:30px;" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-  </button>
+<section id="about" class="sec">
+  <div class="ey"><div class="eyline"></div><span class="eytxt">Identity</span></div>
+  <div class="aboutgrid">
+    <div class="abtxt gr">
+      <p class="big">"Code as a craft, performance as a priority."</p>
+      <p>I am a developer who believes the best products are those that feel invisible yet indispensable. My work focuses on high-speed, reliable applications that provide immediate value.</p>
+      <p>Based in Palakkad, Kerala. Working globally.</p>
+    </div>
+  </div>
+</section>
 
-  <!-- Hero Section -->
-  <section id="hero">
-    <canvas id="pcanvas"></canvas>
-    
-    <div class="hcontainer">
-      <div class="hl">
-        <h1 class="hname">
-          <span class="hnrow"><span class="hnin" id="hn1">Mohammed</span></span>
-          <span class="hnrow"><span class="hnin" id="hn2" style="color:var(--gold);font-style:italic">Arshid</span></span>
-        </h1>
-        <p class="hrole">
-          <span id="ttext"></span><span id="tcur"></span>
-        </p>
-        <p class="hdesc">Crafting high-performance digital experiences across mobile and web. Specializing in Flutter, MERN, and scalable cloud architectures.</p>
-        <div class="hctas">
-          <a href="#projects" class="btn-send" style="display:inline-block; width:auto; padding: 20px 32px; text-decoration: none;">View the Work</a>
-        </div>
-      </div>
-      
-      <div class="hr">
-        <div class="hcard">
-          <div style="font-family: var(--fm); font-size: 10px; color: var(--gold); margin-bottom: 24px; letter-spacing: 2px;">// SYSTEM STATUS: REIFIED</div>
-          <div class="sgrid">
-            <div><div class="snum cval" data-v="2">0</div><div class="slbl">PROD APPS</div></div>
-            <div><div class="snum cval" data-v="21">0</div><div class="slbl">YEARS OLD</div></div>
-            <div><div class="snum cval" data-v="04">0</div><div class="slbl">STRICT STACKS</div></div>
-            <div><div class="snum">∞</div><div class="slbl">ITERATIONS</div></div>
-          </div>
-        </div>
+<section id="contact" class="sec">
+  <div class="ctwrap">
+    <div class="gr">
+      <h2 class="stitle" style="margin-bottom: 24px;">Inquire for <em>partnerships</em></h2>
+      <p class="csub">I am currently open to freelance opportunities and full-time engineering roles.</p>
+      <div class="clinks">
+        <a href="mailto:arshidem0@gmail.com" class="clink"><span>✉</span> arshidem0@gmail.com</a>
+        <a href="tel:+918157875032" class="clink"><span>◎</span> +91 81578 75032</a>
+        <a href="https://www.linkedin.com/in/mohammed-arshid-em" target="_blank" class="clink"><span>⬡</span> LinkedIn</a>
+        <a href="https://github.com/arshidem" target="_blank" class="clink"><span>◈</span> GitHub</a>
       </div>
     </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills" class="sec">
-    <span class="eytxt">Expertise</span>
-    <h2 class="stitle gr">Engineered for <em>performance</em></h2>
-    <div class="skgrid">
-      <div class="skcard gr">
-        <span class="skicon">◈</span>
-        <div class="skname">Frontend</div>
-        <div class="sktags">
-          <span class="sktag">React.js</span><span class="sktag">Next.js</span><span class="sktag">Tailwind</span><span class="sktag">GSAP</span>
-        </div>
-      </div>
-      <div class="skcard gr">
-        <span class="skicon">⬡</span>
-        <div class="skname">Backend</div>
-        <div class="sktags">
-          <span class="sktag">Node.js</span><span class="sktag">Express</span><span class="sktag">Supabase</span><span class="sktag">Go</span>
-        </div>
-      </div>
-      <div class="skcard gr">
-        <span class="skicon">◉</span>
-        <div class="skname">Mobile</div>
-        <div class="sktags">
-          <span class="sktag">Flutter</span><span class="sktag">Dart</span><span class="sktag">Riverpod</span><span class="sktag">Firebase</span>
-        </div>
+    <div class="gr">
+      <div class="cform">
+        <input class="fin" id="fn" type="text" placeholder="Name" />
+        <input class="fin" id="fe" type="email" placeholder="Email" />
+        <textarea class="fta" id="fm" placeholder="Project details..."></textarea>
+        <button class="btn-send" id="sendBtn"><span id="sbtn">Connect Now</span></button>
+        <div id="sstatus"></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="sec">
-    <span class="eytxt">Case Studies</span>
-    <h2 class="stitle gr">Selected <em>impact</em></h2>
-    <div class="prjlist">
-      <div class="prjitem gr">
-        <div class="prjnum">01</div>
-        <div>
-          <span class="prjbadge">Flutter · Firebase</span>
-          <div class="prjname">KoFund</div>
-          <p class="prjdesc">Empowering communities with secure contribution tracking, real-time push notifications, and automated fund management.</p>
-          <div class="prjstack"><span class="stag">Flutter</span><span class="stag">Cloud Functions</span><span class="stag">Riverpod</span></div>
-        </div>
-      </div>
-      <a href="https://nike-redesign-delta.vercel.app" target="_blank" class="prjitem gr">
-        <div class="prjnum">02</div>
-        <div>
-          <span class="prjbadge">MERN · Commerce</span>
-          <div class="prjname">Nike Redesign</div>
-          <p class="prjdesc">A high-conversion e-commerce platform featuring seamless Razorpay checkout, PWA capabilities, and an advanced admin dashboard.</p>
-          <div class="prjstack"><span class="stag">React</span><span class="stag">MongoDB</span><span class="stag">Razorpay</span></div>
-        </div>
-      </a>
-      <div class="prjitem gr">
-        <div class="prjnum">03</div>
-        <div>
-          <span class="prjbadge">Supabase · Storytech</span>
-          <div class="prjname">Fate Unwritten</div>
-          <p class="prjdesc">Immersive interactive fiction platform with branching narratives, optimized media storage on Cloudflare R2, and offline capability.</p>
-          <div class="prjstack"><span class="stag">Flutter</span><span class="stag">Cloudflare R2</span><span class="stag">Supabase</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
+<footer>
+  <div class="fcopy">© 2026 Mohammed Arshid EM · ALL RIGHTS REIFIED</div>
+  <button class="fbk" onclick="window.scrollTo({top:0,behavior:'smooth'})">TOP <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><path d="M6.5 10.5V2.5M2.5 6.5l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+</footer>
 
-  <!-- Scripts -->
-  <script src="script.js"></script>
+<script>
+// --- Lenis Smooth Scroll ---
+const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
+
+// --- GSAP Setup ---
+gsap.registerPlugin(ScrollTrigger);
+
+// --- Premium Cursor Fix ---
+if (window.innerWidth > 900) {
+  const cdot = document.getElementById('cdot'), cring = document.getElementById('cring');
+  let mx = 0, my = 0, rx = 0, ry = 0, isMoving = false;
+
+  document.addEventListener('mousemove', e => {
+    if (!isMoving) { 
+      isMoving = true; 
+      rx = e.clientX; ry = e.clientY; 
+      cdot.style.opacity = '1';
+      cring.style.opacity = '1';
+    }
+    mx = e.clientX; my = e.clientY;
+    cdot.style.left = mx + 'px';
+    cdot.style.top = my + 'px';
+  });
+
+  function updateRing() {
+    if (isMoving) {
+      rx += (mx - rx) * 0.15; 
+      ry += (my - ry) * 0.15;
+      cring.style.left = rx + 'px';
+      cring.style.top = ry + 'px';
+    }
+    requestAnimationFrame(updateRing);
+  }
+  updateRing();
+
+  document.querySelectorAll('a, button, .prjitem, .skcard, .tmode, .btn-g, .btn-o').forEach(el => {
+    el.addEventListener('mouseenter', () => cring.classList.add('big'));
+    el.addEventListener('mouseleave', () => cring.classList.remove('big'));
+  });
+
+  document.addEventListener('mouseleave', () => { cdot.style.opacity = '0'; cring.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { if(isMoving) { cdot.style.opacity = '1'; cring.style.opacity = '1'; } });
+} else {
+  document.body.classList.add('mobile-cursor-off');
+}
+
+// --- Theme Toggle ---
+const tmode = document.getElementById('tmode');
+const toggleTheme = () => {
+  document.body.classList.toggle('light-mode');
+  localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+};
+if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+if (tmode) tmode.onclick = toggleTheme;
+
+// --- Loader ---
+const loaderBar = document.getElementById('ldbar'), pctSpan = document.getElementById('ldpct');
+let progress = 0;
+const loaderIv = setInterval(() => {
+  progress += Math.random() * 15 + 5;
+  if (progress >= 100) {
+    progress = 100; clearInterval(loaderIv);
+    setTimeout(() => {
+      gsap.to('#loader', { opacity: 0, duration: 1, ease: 'power4.inOut', onComplete: () => {
+        document.getElementById('loader').style.display = 'none';
+        animateHero();
+      }});
+    }, 400);
+  }
+  loaderBar.style.width = progress + '%'; pctSpan.textContent = Math.floor(progress) + '%';
+}, 100);
+
+function animateHero() {
+  const tl = gsap.timeline();
+  tl.to('.hnin', { y: 0, duration: 1.2, stagger: 0.1, ease: 'power4.out' })
+    .to('#htag, #hrole, #hdesc, #hctas, #sd', { opacity: 1, y: 0, duration: 0.8, stagger: 0.05, ease: 'power3.out' }, "-=0.8")
+    .to('#hcard', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, "-=1");
+  typedInit();
+}
+
+function typedInit() {
+  const words = ['Full Stack Engineer', 'Flutter Specialist', 'System Designer', 'Product Maker'];
+  let wordIdx = 0, charIdx = 0, isDeleting = false, textEl = document.getElementById('ttext');
+  function type() {
+    if (!textEl) return;
+    let current = words[wordIdx];
+    if (isDeleting) { textEl.textContent = current.substring(0, charIdx--); }
+    else { textEl.textContent = current.substring(0, charIdx++); }
+    let speed = isDeleting ? 40 : 80;
+    if (!isDeleting && charIdx === current.length + 1) { speed = 2000; isDeleting = true; }
+    else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % words.length; speed = 500; }
+    setTimeout(type, speed);
+  }
+  type();
+}
+
+// --- Particles ---
+const canvas = document.getElementById('pcanvas'), ctx = canvas.getContext('2d');
+let w, h, pList = [];
+function initCanvas() { 
+  w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; pList = []; 
+  for (let i=0; i<60; i++) pList.push({ x: Math.random()*w, y: Math.random()*h, r: Math.random()*1+0.5, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3, a: Math.random()*0.3+0.1 }); 
+}
+initCanvas(); window.addEventListener('resize', initCanvas);
+function drawParticles() {
+  ctx.clearRect(0,0,w,h);
+  pList.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x<0||p.x>w) p.vx*=-1; if (p.y<0||p.y>h) p.vy*=-1;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fillStyle = `rgba(201,168,76,${p.a})`; ctx.fill();
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// --- Scroll Reveal ---
+gsap.utils.toArray('.gr').forEach(el => {
+  gsap.fromTo(el, { opacity:0, y:30 }, { opacity:1, y:0, duration:1, ease:'power3.out', scrollTrigger: { trigger:el, start:'top 90%' } });
+});
+
+// --- Counters ---
+gsap.utils.toArray('.cval').forEach(el => {
+  let v = +el.getAttribute('data-v');
+  ScrollTrigger.create({ trigger:el, start:'top 90%', onEnter: () => {
+    gsap.to(el, { textContent: v, duration: 2, snap:{textContent:1}, onUpdate: () => { el.textContent = Math.floor(+el.textContent); } });
+  }});
+});
+
+// --- Magnetic ---
+document.querySelectorAll('.mag').forEach(b => {
+  b.addEventListener('mousemove', e => { let r=b.getBoundingClientRect(), x=(e.clientX-r.left-r.width/2)*0.2, y=(e.clientY-r.top-r.height/2)*0.2; gsap.to(b,{x,y,duration:0.3}); });
+  b.addEventListener('mouseleave', () => gsap.to(b,{x:0,y:0,duration:0.5}));
+});
+
+// --- PWA ---
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js')); }
+</script>
 </body>
 </html>
