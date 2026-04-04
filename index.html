@@ -147,7 +147,7 @@
       .icon-ring {
         position: absolute;
         inset: -10px;
-        border-radius: 12px;
+        border-radius: 9999px;
         background: linear-gradient(
           135deg,
           var(--gold),
@@ -161,13 +161,13 @@
         content: "";
         position: absolute;
         inset: 4px;
-        border-radius: 12px;
+        border-radius: 9999px;
         background: var(--bg);
       }
       .icon-ring-outer {
         position: absolute;
         inset: -18px;
-        border-radius: 12px;
+        border-radius: 9999px;
         background: linear-gradient(
           225deg,
           var(--gold-l),
@@ -181,14 +181,14 @@
         content: "";
         position: absolute;
         inset: 3px;
-        border-radius: 12px;
+        border-radius: 9999px;
         background: var(--bg);
       }
       #loaderIcon {
         position: relative;
         width: 100%;
         height: 100%;
-        border-radius: 12px;
+        border-radius: 9999px;
         object-fit: cover;
         z-index: 2;
         animation: iconPulse 1.2s ease-in-out infinite alternate;
@@ -245,11 +245,14 @@
         width: 220px;
         height: 2px;
         background: rgba(255, 255, 255, 0.1);
+        border-radius: 9999px;
+        overflow: hidden;
       }
       .ld-bar {
         width: 0%;
         height: 100%;
         background: var(--gold);
+        border-radius: 9999px;
       }
       .ld-pct {
         font-family: var(--fm);
@@ -585,18 +588,18 @@
       /* Hero */
       #hero {
         min-height: 100vh;
-        display: grid;
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        padding: 130px 40px 80px;
+        text-align: center;
+        padding: 140px 40px 100px;
         position: relative;
         overflow: hidden;
       }
       @media (max-width: 900px) {
         #hero {
-          grid-template-columns: 1fr;
-          padding: 120px 24px 70px;
-          gap: 48px;
+          padding: 120px 24px 80px;
         }
       }
       #pcanvas {
@@ -616,7 +619,7 @@
           linear-gradient(90deg, rgba(201, 168, 76, 0.035) 1px, transparent 1px);
         background-size: 64px 64px;
         mask-image: radial-gradient(
-          ellipse 70% 70% at 30% 50%,
+          ellipse 70% 70% at 50% 50%,
           black,
           transparent
         );
@@ -630,12 +633,16 @@
       .htag {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         font-family: var(--fm);
-        font-size: 9px;
+        font-size: 10px;
         color: var(--gold);
-        letter-spacing: 0.2em;
-        margin-bottom: 30px;
+        letter-spacing: 0.15em;
+        margin-bottom: 32px;
+        background: var(--gold-d);
+        padding: 8px 16px;
+        border-radius: 100px;
+        border: 1px solid var(--border);
         opacity: 0;
         transform: translateY(12px);
       }
@@ -702,12 +709,13 @@
         line-height: 1.75;
         color: rgba(240, 236, 228, 0.6);
         max-width: 480px;
-        margin-bottom: 48px;
+        margin: 0 auto 48px;
         opacity: 0;
         transform: translateY(12px);
       }
       .hctas {
         display: flex;
+        justify-content: center;
         gap: 14px;
         flex-wrap: wrap;
         opacity: 0;
@@ -804,12 +812,13 @@
       /* Skills, Projects, etc */
       .skgrid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2px;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 16px;
       }
       @media (max-width: 900px) {
         .skgrid {
           grid-template-columns: 1fr;
+          gap: 12px;
         }
       }
       .skcard {
@@ -886,11 +895,11 @@
         border-radius: 12px;
         display: grid;
         grid-template-columns: 70px 1fr 40px;
-        align-items: start;
+        align-items: center;
         gap: 32px;
-        padding: 36px 34px;
+        padding: 40px 34px;
         background: var(--bg3);
-        border-left: 2px solid transparent;
+        border: 1px solid transparent;
         text-decoration: none;
         color: inherit;
         transition: 0.35s var(--ease);
@@ -898,8 +907,9 @@
       }
       .prjitem:hover {
         background: var(--bg4);
-        border-left-color: var(--gold);
-        transform: translateX(6px);
+        border-color: var(--gold);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
       }
       .prjnum {
         font-family: var(--fd);
@@ -987,7 +997,7 @@
         opacity: 0.4;
       }
       .tlitem {
-        padding-bottom: 52px;
+        padding-bottom: 64px;
         position: relative;
       }
       .tldot {
@@ -1033,7 +1043,7 @@
       .aboutgrid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 68px;
+        gap: 80px;
         align-items: center;
       }
       @media (max-width: 900px) {
@@ -1091,18 +1101,48 @@
       }
       .cntrs {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
         margin-top: 56px;
       }
       .cntr {
-        padding: 28px 16px;
+        padding: 40px 24px;
         text-align: center;
         border-right: 1px solid var(--border);
-        transition: 0.2s;
+        border-bottom: 1px solid var(--border);
+        transition: 0.3s var(--ease);
       }
-      .cntr:last-child {
-        border-right: none;
+      .cntr:nth-child(even) {
+        border-right: 1px solid var(--border);
+      }
+      /* Remove border-right on the last items of each row if possible, 
+         but for a simple grid of 4, we can target it or just let the border be consistent. 
+         A cleaner way for auto-fit is to use gaps and borders on items. */
+      @media (min-width: 800px) {
+        .cntr:nth-child(4) {
+          border-right: none;
+        }
+        .cntr {
+          border-bottom: none;
+        }
+      }
+      @media (max-width: 799px) and (min-width: 400px) {
+        .cntrs {
+          grid-template-columns: 1fr 1fr;
+        }
+        .cntr:nth-child(2n) {
+          border-right: none;
+        }
+      }
+      @media (max-width: 399px) {
+        .cntrs {
+          grid-template-columns: 1fr;
+        }
+        .cntr {
+          border-right: none;
+        }
       }
       .cntr:hover {
         background: var(--bg3);
@@ -1124,8 +1164,8 @@
       .ctwrap {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 68px;
-        align-items: start;
+        gap: 80px;
+        align-items: center;
       }
       @media (max-width: 900px) {
         .ctwrap {
@@ -1235,11 +1275,12 @@
       }
 
       footer {
-        padding: 28px 40px;
+        padding: 40px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-top: 1px solid rgba(255, 255, 255, 0.04);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        background: #050505;
       }
       @media (max-width: 700px) {
         footer {
@@ -1306,6 +1347,25 @@
       }
       .gr {
         opacity: 0;
+      }
+
+      /* Stats Banner */
+      .stats-banner-card {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 12px;
+        margin-top: 0;
+        background: rgba(18, 18, 18, 0.75);
+        backdrop-filter: blur(12px);
+        padding: 48px;
+        border: 1px solid var(--border);
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      @media (max-width: 768px) {
+        .stats-banner-card {
+          padding: 32px 24px;
+        }
       }
 
       /* Resume Prompt Modal */
@@ -1486,18 +1546,7 @@
     </section>
     <section id="statsBanner" class="sec" style="padding-top: 0">
       <div class="secin">
-        <div
-          class="hcard"
-          style="
-            width: 100%;
-            opacity: 1;
-            transform: none;
-            max-width: 100%;
-            border-radius: 12px;
-            margin-top: 20px;
-            background: rgba(18, 18, 18, 0.7);
-          "
-        >
+        <div class="stats-banner-card" id="hcard">
           <div class="clabel">// Current Stack Overview</div>
           <div
             class="sgrid"
@@ -1934,7 +1983,13 @@
         gsap.to("#hrole", { opacity: 1, y: 0, duration: 0.6, delay: 0.55 });
         gsap.to("#hdesc", { opacity: 1, y: 0, duration: 0.6, delay: 0.7 });
         gsap.to("#hctas", { opacity: 1, y: 0, duration: 0.6, delay: 0.85 });
-        gsap.to("#hcard", { opacity: 1, y: 0, duration: 1, delay: 0.5 });
+        gsap.to("#hcard", {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: 0.8,
+          ease: "power2.out",
+        });
         typedStart();
       }
       function typedStart() {
@@ -2000,8 +2055,13 @@
         draw() {
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(201,168,76,${this.a})`;
+          const gold = getComputedStyle(document.documentElement)
+            .getPropertyValue("--gold")
+            .trim();
+          ctx.fillStyle = gold;
+          ctx.globalAlpha = this.a;
           ctx.fill();
+          ctx.globalAlpha = 1;
         }
       }
       for (let i = 0; i < 40; i++) particles.push(new Part());
@@ -2011,6 +2071,9 @@
           p.update();
           p.draw();
         });
+        const gold = getComputedStyle(document.documentElement)
+          .getPropertyValue("--gold")
+          .trim();
         for (let i = 0; i < particles.length; i++)
           for (let j = i + 1; j < particles.length; j++) {
             let dx = particles[i].x - particles[j].x,
@@ -2018,17 +2081,18 @@
               dist = Math.hypot(dx, dy);
             if (dist < 100) {
               ctx.beginPath();
-              ctx.strokeStyle = `rgba(201,168,76,${0.08 * (1 - dist / 100)})`;
+              ctx.strokeStyle = gold;
+              ctx.globalAlpha = 0.08 * (1 - dist / 100);
               ctx.lineWidth = 0.5;
               ctx.moveTo(particles[i].x, particles[i].y);
               ctx.lineTo(particles[j].x, particles[j].y);
               ctx.stroke();
+              ctx.globalAlpha = 1;
             }
           }
         requestAnimationFrame(animateParticles);
       }
       animateParticles();
-
 
       // Marquee
       const mqtrack = document.getElementById("mqtrack");
@@ -2290,48 +2354,57 @@
         });
       }
       // ========== THEME TOGGLE (VIEW TRANSITION) ==========
-      const themeToggleBtn = document.getElementById("themeToggle");
-      if (themeToggleBtn) {
-        themeToggleBtn.addEventListener("click", function (event) {
-          if (!document.startViewTransition) {
-            document.documentElement.classList.toggle("light");
-            return;
-          }
+      document.addEventListener("DOMContentLoaded", () => {
+        const themeToggleBtn = document.getElementById("themeToggle");
+        if (themeToggleBtn) {
+          themeToggleBtn.addEventListener("click", function (event) {
+            if (!document.startViewTransition) {
+              document.documentElement.classList.toggle("light");
+              return;
+            }
 
-          const x = event.clientX;
-          const y = event.clientY;
-          const endRadius = Math.hypot(
-            Math.max(x, innerWidth - x),
-            Math.max(y, innerHeight - y),
-          );
-
-          const transition = document.startViewTransition(() => {
-            document.documentElement.classList.toggle("light");
-          });
-
-          transition.ready.then(() => {
-            const isLight =
-              document.documentElement.classList.contains("light");
-            const clipPath = [
-              `circle(0px at ${x}px ${y}px)`,
-              `circle(${endRadius}px at ${x}px ${y}px)`,
-            ];
-
-            document.documentElement.animate(
-              {
-                clipPath: isLight ? clipPath : clipPath.reverse(),
-              },
-              {
-                duration: 750,
-                easing: "cubic-bezier(0.8, 0, 0.2, 1)",
-                pseudoElement: isLight
-                  ? "::view-transition-new(root)"
-                  : "::view-transition-old(root)",
-              },
+            const x = event.clientX;
+            const y = event.clientY;
+            const endRadius = Math.hypot(
+              Math.max(x, innerWidth - x),
+              Math.max(y, innerHeight - y),
             );
+
+            const transition = document.startViewTransition(() => {
+              document.documentElement.classList.toggle("light");
+            });
+
+            transition.ready.then(() => {
+              const isLight =
+                document.documentElement.classList.contains("light");
+              if (!isLight)
+                document.documentElement.classList.add("dark-transition");
+
+              const clipPath = [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${endRadius}px at ${x}px ${y}px)`,
+              ];
+
+              const animation = document.documentElement.animate(
+                {
+                  clipPath: isLight ? clipPath : [...clipPath].reverse(),
+                },
+                {
+                  duration: 750,
+                  easing: "cubic-bezier(0.8, 0, 0.2, 1)",
+                  pseudoElement: isLight
+                    ? "::view-transition-new(root)"
+                    : "::view-transition-old(root)",
+                },
+              );
+
+              animation.onfinish = () => {
+                document.documentElement.classList.remove("dark-transition");
+              };
+            });
           });
-        });
-      }
+        }
+      });
     </script>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
       <svg
