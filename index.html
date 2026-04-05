@@ -136,154 +136,6 @@
 
     /* Custom cursor only on desktop (screen width > 900px) */
 
-    /* ── Loader with Animated Rings Around Icon ── */
-    #loader {
-      position: fixed;
-      inset: 0;
-      background: #030303;
-      z-index: 10000;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 32px;
-    }
-
-    .ld-icon {
-      position: relative;
-      width: 100px;
-      height: 100px;
-    }
-
-    .icon-ring {
-      position: absolute;
-      inset: -10px;
-      border-radius: 9999px;
-      background: linear-gradient(135deg,
-          var(--gold),
-          #ffd700,
-          var(--gold-l),
-          #ffed8a);
-      animation: spinRing 1.8s linear infinite;
-    }
-
-    .icon-ring::before {
-      content: "";
-      position: absolute;
-      inset: 4px;
-      border-radius: 9999px;
-      background: var(--bg);
-    }
-
-    .icon-ring-outer {
-      position: absolute;
-      inset: -18px;
-      border-radius: 9999px;
-      background: linear-gradient(225deg,
-          var(--gold-l),
-          rgba(201, 168, 76, 0.3),
-          var(--gold));
-      animation: spinRingReverse 2.2s linear infinite;
-      opacity: 0.6;
-    }
-
-    .icon-ring-outer::before {
-      content: "";
-      position: absolute;
-      inset: 3px;
-      border-radius: 9999px;
-      background: var(--bg);
-    }
-
-    #loaderIcon {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 9999px;
-      object-fit: cover;
-      z-index: 2;
-      animation: iconPulse 1.2s ease-in-out infinite alternate;
-      box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
-    }
-
-    @keyframes spinRing {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes spinRingReverse {
-      from {
-        transform: rotate(360deg);
-      }
-
-      to {
-        transform: rotate(0deg);
-      }
-    }
-
-    @keyframes iconPulse {
-      from {
-        transform: scale(0.94);
-        opacity: 0.8;
-      }
-
-      to {
-        transform: scale(1.06);
-        opacity: 1;
-      }
-    }
-
-    .ld-name {
-      font-family: var(--fd);
-      font-size: clamp(28px, 8vw, 70px);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      overflow: hidden;
-    }
-
-    .ld-name span {
-      display: inline-block;
-      transform: translateY(100%);
-      opacity: 0;
-    }
-
-    .ld-name span:first-child {
-      color: var(--white);
-    }
-
-    .ld-name span:last-child {
-      color: var(--gold);
-      font-style: italic;
-    }
-
-    .ld-bar-w {
-      width: 220px;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 9999px;
-      overflow: hidden;
-    }
-
-    .ld-bar {
-      width: 0%;
-      height: 100%;
-      background: var(--gold);
-      border-radius: 9999px;
-    }
-
-    .ld-pct {
-      font-family: var(--fm);
-      font-size: 12px;
-      letter-spacing: 2px;
-      color: var(--gold);
-    }
 
     /* ── Navbar with PNG Icon ── */
     nav {
@@ -1274,7 +1126,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
-      align-items: center;
+      align-items: start;
     }
 
     @media (max-width: 900px) {
@@ -1395,6 +1247,7 @@
     }
 
     .btn-send {
+      margin-top: 10px;
       border-radius: 12px;
       height: 48px;
       background: var(--gold);
@@ -1594,19 +1447,6 @@
 </head>
 
 <body>
-  <!-- Loader with Animated Rings Around 192.png Icon -->
-  <div id="loader">
-    <div class="ld-icon">
-      <div class="icon-ring-outer"></div>
-      <div class="icon-ring"></div>
-      <img src="icon-192.png" alt="Logo" id="loaderIcon" />
-    </div>
-    <div class="ld-name"><span>Mohammed</span><span>Arshid</span></div>
-    <div class="ld-bar-w">
-      <div class="ld-bar" id="ldbar"></div>
-    </div>
-    <div class="ld-pct" id="ldpct">0%</div>
-  </div>
 
   <div id="menuBackdrop" onclick="closeMenu()"></div>
 
@@ -1961,7 +1801,6 @@
       <div class="ctwrap">
         <div class="gr">
           <div class="cform-field">
-            <label class="flabel">// Direct Links</label>
             <div class="clinks" style="margin-top: 5px">
               <a href="mailto:arshidem0@gmail.com" class="clink">
                 <span class="clinkic">
@@ -2059,29 +1898,7 @@
     });
 
     gsap.registerPlugin(ScrollTrigger);
-    // Loader
-    const loaderBar = document.getElementById("ldbar"),
-      pctSpan = document.getElementById("ldpct");
-    let p = 0,
-      iv = setInterval(() => {
-        p += Math.random() * 12 + 3;
-        if (p >= 100) {
-          p = 100;
-          clearInterval(iv);
-          setTimeout(() => {
-            gsap.to("#loader", {
-              opacity: 0,
-              duration: 0.6,
-              onComplete: () => {
-                document.getElementById("loader").style.display = "none";
-                heroIn();
-              },
-            });
-          }, 200);
-        }
-        loaderBar.style.width = p + "%";
-        pctSpan.textContent = Math.floor(p) + "%";
-      }, 90);
+    heroIn();
     function heroIn() {
       gsap.to("#hn1", {
         y: "0%",
