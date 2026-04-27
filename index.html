@@ -1379,27 +1379,38 @@
       }
     }
 
-    /* Resume Prompt Modal */
-    #resumePrompt {
+    /* Modal Enhancement */
+    #modalBackdrop {
       position: fixed;
-      bottom: 30px;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 10001;
+      display: none;
+      opacity: 0;
+    }
+
+    #resumePrompt, #kofundPrompt {
+      position: fixed;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       background: var(--bg3);
       border: 1px solid var(--gold);
       border-radius: 12px;
-      padding: 16px 24px;
+      padding: 24px 32px;
       z-index: 10002;
       display: none;
       gap: 16px;
       backdrop-filter: blur(12px);
       font-family: var(--fm);
-      font-size: 12px;
+      font-size: 13px;
       align-items: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border);
+      opacity: 0;
     }
 
-    #resumePrompt span {
+    #resumePrompt span, #kofundPrompt span {
       color: var(--white);
     }
 
@@ -1424,7 +1435,7 @@
       color: #0a0a0a;
     }
 
-    #closePrompt {
+    #closePrompt, #closeKofundPrompt {
       background: none;
       border: none;
       color: #888;
@@ -1432,12 +1443,12 @@
       font-size: 14px;
     }
 
-    #closePrompt:hover {
+    #closePrompt:hover, #closeKofundPrompt:hover {
       color: var(--gold);
     }
 
     @media (max-width: 550px) {
-      #resumePrompt {
+      #resumePrompt, #kofundPrompt {
         flex-wrap: wrap;
         width: 90%;
         gap: 12px;
@@ -1619,7 +1630,7 @@
       </div>
       <h2 class="stitle gr">Projects <em>shipped</em></h2>
       <div class="prjlist">
-        <div class="prjitem gr">
+        <a href="#" id="kofundBtn" class="prjitem gr">
           <div class="prjnum">01</div>
           <div>
             <div class="prjhead">
@@ -1637,8 +1648,8 @@
                 class="stag">Firestore</span><span class="stag">FCM</span><span class="stag">Dart</span>
             </div>
           </div>
-          <div class="prjarr">→</div>
-        </div>
+          <div class="prjarr">↗</div>
+        </a>
         <a href="https://nike-redesign-delta.vercel.app" target="_blank" class="prjitem gr">
           <div class="prjnum">02</div>
           <div>
@@ -1881,10 +1892,18 @@
     </button>
   </footer>
 
+  <div id="modalBackdrop"></div>
+
   <div id="resumePrompt">
     <span>📄 How would you like to open the resume?</span><button id="viewResume" class="prompt-btn primary">
       View in Browser</button><button id="downloadResumeBtn" class="prompt-btn">Download PDF</button><button
       id="closePrompt">✕</button>
+  </div>
+
+  <div id="kofundPrompt">
+    <span>📱 How would you like to open KoFund?</span><button id="viewKofundBtn" class="prompt-btn primary">
+      Open in Browser</button><button id="downloadKofundBtn" class="prompt-btn">Download the App</button><button
+      id="closeKofundPrompt">✕</button>
   </div>
 
   <script>
@@ -2225,26 +2244,76 @@
       link.click();
       document.body.removeChild(link);
     }
+    const mBackdrop = document.getElementById("modalBackdrop");
+
+    function showPrompt(el) {
+      gsap.to(mBackdrop, { display: "block", opacity: 1, duration: 0.3 });
+      gsap.fromTo(el,
+        { display: "flex", opacity: 0, scale: 0.8, y: "-40%" },
+        { opacity: 1, scale: 1, y: "-50%", duration: 0.4, ease: "back.out(1.7)" }
+      );
+    }
+
+    function hidePrompt(el) {
+      gsap.to(el, {
+        opacity: 0, scale: 0.8, duration: 0.2, onComplete: () => {
+          el.style.display = "none";
+        }
+      });
+      gsap.to(mBackdrop, {
+        opacity: 0, duration: 0.2, onComplete: () => {
+          mBackdrop.style.display = "none";
+        }
+      });
+    }
+
     resumeBtnEl?.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      promptDiv.style.display = "flex";
+      showPrompt(promptDiv);
     });
     viewBtn?.addEventListener("click", (e) => {
       e.preventDefault();
       window.open(getResumeUrl(), "_blank");
-      promptDiv.style.display = "none";
+      hidePrompt(promptDiv);
     });
     downloadResumeBtn?.addEventListener("click", (e) => {
       e.preventDefault();
       downloadResumeFile();
-      promptDiv.style.display = "none";
+      hidePrompt(promptDiv);
     });
     closePromptBtn?.addEventListener("click", () => {
-      promptDiv.style.display = "none";
+      hidePrompt(promptDiv);
     });
-    promptDiv?.addEventListener("click", (e) => {
-      if (e.target === promptDiv) promptDiv.style.display = "none";
+    mBackdrop?.addEventListener("click", () => {
+      if (promptDiv.style.display === "flex") hidePrompt(promptDiv);
+      if (kofundPromptDiv.style.display === "flex") hidePrompt(kofundPromptDiv);
+    });
+
+    // ========== KOFUND PROMPT ==========
+    const kofundLink = document.getElementById("kofundBtn");
+    const kofundPromptDiv = document.getElementById("kofundPrompt");
+    const viewKofundBtn = document.getElementById("viewKofundBtn");
+    const downloadKofundBtn = document.getElementById("downloadKofundBtn");
+    const closeKofundPromptBtn = document.getElementById("closeKofundPrompt");
+
+    kofundLink?.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      showPrompt(kofundPromptDiv);
+    });
+    viewKofundBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.open("https://kofund-153ba.web.app/", "_blank");
+      hidePrompt(kofundPromptDiv);
+    });
+    downloadKofundBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.open("https://drive.google.com/file/d/1nbF9tyfoQgT78dAv48Uz9EwrZRfVSnWL/view?usp=drive_link", "_blank");
+      hidePrompt(kofundPromptDiv);
+    });
+    closeKofundPromptBtn?.addEventListener("click", () => {
+      hidePrompt(kofundPromptDiv);
     });
 
     // ========== FORM SUBMISSION ==========
